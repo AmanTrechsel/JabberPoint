@@ -1,9 +1,7 @@
 package Control;
 
-import Presentation.*;
-import Accessor.XMLAccessor;
 import Control.Commands.*;
-import Accessor.Accessor;
+
 import java.awt.MenuBar;
 import java.awt.Frame;
 import java.awt.Menu;
@@ -11,127 +9,119 @@ import java.awt.MenuItem;
 import java.awt.MenuShortcut;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.naming.ldap.Control;
-import javax.swing.JOptionPane;
+public class MenuController extends MenuBar
+{
+  // Constants
+  private static final long serialVersionUID = 227L;
 
-public class MenuController extends MenuBar {
+  protected static final String FILE = "File";
+  protected static final String VIEW = "View";
+  protected static final String HELP = "Help";
 
-    private static MenuController menuController;
-    private Frame parent; // het frame, alleen gebruikt als ouder voor de Dialogs
-    private Presentation presentation; // Er worden commando's gegeven aan de presentatie
+  public static final String TESTFILE = "test.xml";
+  public static final String SAVEFILE = "dump.xml";
 
-    private static final long serialVersionUID = 227L;
+  public static final String IOEX = "IO Exception: ";
+  public static final String LOADERR = "Load Error";
+  public static final String SAVEERR = "Save Error";
 
-    protected static final String ABOUT = "About";
-    protected static final String FILE = "File";
-    protected static final String EXIT = "Exit";
-    protected static final String GOTO = "Go to";
-    protected static final String HELP = "Help";
-    protected static final String NEW = "New";
-    protected static final String NEXT = "Next";
-    protected static final String OPEN = "Open";
-    protected static final String PREV = "Prev";
-    protected static final String SAVE = "Save";
-    protected static final String VIEW = "View";
+  // Fields
+  private static MenuController menuController;
+  private Frame parent;
 
-
-    protected static final String IOEX = "IO Exception: ";
-    protected static final String LOADERR = "Load Error";
-    protected static final String SAVEERR = "Save Error";
-    
-    public static MenuController getInstance()
+  // Singleton
+  public static MenuController getInstance()
+  {
+    if (MenuController.menuController == null)
     {
-        if (MenuController.menuController == null)
+      MenuController.menuController = new MenuController(new Frame(""));
+    }
+
+    return MenuController.menuController;
+  }
+
+  // Constructor
+  public MenuController(Frame frame)
+  {
+    this.parent = frame;
+    createMenuItems();
+  }
+
+  // Setup van de menu-items
+  private void createMenuItems()
+  {
+    // Alle "File" menu-items
+    ArrayList<Command> fileCommands = new ArrayList<Command>();
+    fileCommands.add(new MenuOpen());
+    fileCommands.add(new MenuNew());
+    fileCommands.add(new MenuSave());
+    fileCommands.add(new Exit());
+
+    // Alle "View" menu-items
+    ArrayList<Command> viewCommands = new ArrayList<Command>();
+    viewCommands.add(new PageDown());
+    viewCommands.add(new PageUp());
+    viewCommands.add(new PageGoTo());
+
+    // Alle "Help" menu-items
+    ArrayList<Command> helpCommands = new ArrayList<Command>();
+    helpCommands.add(new ShowAbout());
+
+    // Menu's toevogen
+    add(createMenuItems(FILE, fileCommands, true));
+    add(createMenuItems(VIEW, viewCommands, false));
+    setHelpMenu(createMenuItems(HELP, helpCommands, false));
+  }
+
+  // Maakt een menu aan met de gegeven titel en commando's
+  private Menu createMenuItems(String menuTitle, ArrayList<Command> commands, boolean addSeparator)
+  {
+    // Initialisatie van het menu
+    Menu menu = new Menu(menuTitle);
+    MenuItem menuItem;
+
+    // Alle menu-items toevoegen
+    for (int i = 0; i < commands.size(); i++)
+    {
+      // Commando ophalen
+      Command command = commands.get(i);
+
+      // Separator toevoegen indien nodig
+      if (i == commands.size() - 1 && addSeparator)
+      {
+        menu.addSeparator();
+      }
+
+      // Menu-item toevoegen
+      menu.add(menuItem = createMenuItem(command.getLabel(), command.getShortcut()));
+
+      // Actie toevoegen aan het menu-item
+      menuItem.addActionListener(new ActionListener()
+      {
+        public void actionPerformed(ActionEvent actionEvent)
         {
-            MenuController.menuController = new MenuController(new Frame(""), ControlPresentation.getInstance().getPresentation());
+          // Commando uitvoeren
+          command.execute();
         }
-        return MenuController.menuController;
+      });
     }
 
-    public MenuController(Frame frame, Presentation pres)
-    {
-        parent = frame;
-        presentation = pres;
+    // Menu teruggeven
+    return menu;
+  }
 
-        CreateMenuItems();
-    }
-    
-    private void CreateMenuItems()
-    {
-      MenuItem menuItem;
 
-      ArrayList<Command> fileCommands = new ArrayList<Command>();
-      fileCommands.add(new MenuOpen());
-      fileCommands.add(new MenuNew());
-      fileCommands.add(new MenuSave());
-      fileCommands.add(new Exit());
+  // Geeft de parent frame terug
+  public Frame getFrame()
+  {
+    return this.parent;
+  }
 
-      ArrayList<Command> viewCommands = new ArrayList<Command>();
-      viewCommands.add(new PageDown());
-      viewCommands.add(new PageUp());
-      viewCommands.add(new PageGoTo());
-
-      ArrayList<Command> helpCommands = new ArrayList<Command>();
-      helpCommands.add(new ShowAbout());
-
-      Menu fileMenu = new Menu(FILE);
-      for (int i = 0; i < fileCommands.size(); i++)
-      {
-        if (i == fileCommands.size() - 1)
-        {
-          fileMenu.addSeparator();
-        }
-        Command command = fileCommands.get(i);
-        fileMenu.add(menuItem = createMenuItem(command.getLabel(), command.getShortcut()));
-        menuItem.addActionListener(new ActionListener()
-        {
-          public void actionPerformed(ActionEvent actionEvent)
-          {
-            command.execute();
-          }
-        });
-      }
-      add(fileMenu);
-
-      Menu viewMenu = new Menu(VIEW);
-      for (Command command : viewCommands)
-      {
-        viewMenu.add(menuItem = createMenuItem(command.getLabel(), command.getShortcut()));
-        menuItem.addActionListener(new ActionListener()
-        {
-          public void actionPerformed(ActionEvent actionEvent)
-          {
-            command.execute();
-          }
-        });
-      }
-      add(viewMenu);
-
-      Menu helpMenu = new Menu(HELP);
-      for (Command command : helpCommands)
-      {
-        helpMenu.add(menuItem = createMenuItem(command.getLabel(), command.getShortcut()));
-        menuItem.addActionListener(new ActionListener()
-        {
-          public void actionPerformed(ActionEvent actionEvent)
-          {
-            command.execute();
-          }
-        });
-      }
-      setHelpMenu(helpMenu);
-    }
-
-    public Frame getFrame()
-    {
-        return this.parent;
-    }
-
-    // een menu-item aanmaken
-    public MenuItem createMenuItem(String name, char shortcut) {
-        return new MenuItem(name, new MenuShortcut(shortcut));
-    }
+  // Maakt een menu-item aan met de gegeven naam en sneltoets
+  public MenuItem createMenuItem(String name, char shortcut)
+  {
+    return new MenuItem(name, new MenuShortcut(shortcut));
+  }
 }

@@ -13,10 +13,6 @@ import Presentation.Presentation;
 
 public class MenuSave implements Command
 {
-  protected static final String SAVEERR = "Save Error";
-  protected static final String SAVEFILE = "dump.xml";
-  protected static final String IOEX = "IO Exception: ";
-
     @Override
     public char getShortcut()
     {
@@ -34,10 +30,9 @@ public class MenuSave implements Command
     {
       Accessor xmlAccessor = new XMLAccessor();
       try {
-          xmlAccessor.saveFile(ControlPresentation.getInstance().getPresentation(), SAVEFILE);
+          xmlAccessor.saveFile(ControlPresentation.getInstance().getPresentation(), MenuController.SAVEFILE);
       } catch (IOException exc) {
-          JOptionPane.showMessageDialog(MenuController.getInstance().getFrame(), IOEX + exc,
-                  SAVEERR, JOptionPane.ERROR_MESSAGE);
+          JOptionPane.showMessageDialog(MenuController.getInstance().getFrame(), MenuController.IOEX + exc, MenuController.SAVEERR, JOptionPane.ERROR_MESSAGE);
       }
     }
 }

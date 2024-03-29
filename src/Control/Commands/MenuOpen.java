@@ -3,6 +3,7 @@ package Control.Commands;
 import java.awt.Frame;
 import java.awt.Menu;
 import java.io.IOException;
+import java.util.ResourceBundle.Control;
 
 import javax.swing.JOptionPane;
 
@@ -15,10 +16,6 @@ import Presentation.Presentation;
 
 public class MenuOpen implements Command
 {
-  protected static final String TESTFILE = "test.xml";
-  protected static final String IOEX = "IO Exception: ";
-  protected static final String LOADERR = "Load Error";
-
     @Override
     public char getShortcut()
     {
@@ -39,11 +36,10 @@ public class MenuOpen implements Command
       Accessor xmlAccessor = new XMLAccessor();
       try {
           Presentation presentation = ControlPresentation.getInstance().getPresentation();
-          xmlAccessor.loadFile(presentation, TESTFILE);
+          xmlAccessor.loadFile(presentation, MenuController.TESTFILE);
           presentation.setSlideNumber(0);
       } catch (IOException exc) {
-          JOptionPane.showMessageDialog(parent, IOEX + exc,
-                  LOADERR, JOptionPane.ERROR_MESSAGE);
+          JOptionPane.showMessageDialog(parent, MenuController.IOEX + exc, MenuController.LOADERR, JOptionPane.ERROR_MESSAGE);
       }
       parent.repaint();
     }
