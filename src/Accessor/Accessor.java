@@ -1,25 +1,31 @@
 package Accessor;
 
 import Presentation.Presentation;
+
 import java.io.IOException;
 
 public abstract class Accessor
 {
-    public static final String DEMO_NAME = "Demonstratie presentatie";
-    public static final String DEFAULT_EXTENSION = ".xml";
+  // Constants
+	public static final String DEMO_NAME = "Demonstratie presentatie";
+	public static final String DEFAULT_EXTENSION = ".xml";
 
-    public static Accessor getDemoAccessor()
-    {
-        return new DemoPresentation();
-    }
+  // Laad de demo presentatie
+	public static Accessor getDemoAccessor()
+	{
+		return new DemoPresentation();
+	}
 
-    public Accessor()
-    {
-    }
+  // Constructor
+	public Accessor()
+	{
+	}
 
-    abstract public void loadFile(Presentation p, String fn) throws IOException;
+  // Laad een bestand
+	abstract public void loadFile(Presentation p, String fn) throws IOException;
 
-    abstract public void saveFile(Presentation p, String fn) throws IOException;
+  // Sla een bestand op
+	abstract public void saveFile(Presentation p, String fn) throws IOException;
 
 }
 

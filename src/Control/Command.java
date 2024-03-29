@@ -1,15 +1,13 @@
 package Control;
 
-import Presentation.ControlPresentation;
-import Presentation.Presentation;
-
 public interface Command
 {
-    ControlPresentation controlPresentation = ControlPresentation.getInstance();
+  // Label van de menu commando
+	public abstract String getLabel();
 
-    public abstract char getShortcut();
+  // Shortcut van de menu commando
+	public abstract char getShortcut();
 
-    public abstract String getLabel();
-
-    public void execute();
+  // De code die wordt uitgevoerd wanneer het commando wordt aangeroepen
+	public abstract void execute();
 }

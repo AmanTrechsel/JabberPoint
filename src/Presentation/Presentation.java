@@ -1,6 +1,7 @@
 package Presentation;
 
 import Slide.Slide;
+
 import java.util.ArrayList;
 
 
@@ -16,82 +17,98 @@ import java.util.ArrayList;
  * @version 1.6 2014/05/16 Sylvia Stuurman
  */
 
-public class Presentation {
-    private String showTitle; // de titel van de presentatie
-    private ArrayList<Slide> showList = null; // een ArrayList met de Slides
-    private int currentSlideNumber = 0; // het slidenummer van de huidige Slide
-    private SlideViewerComponent slideViewComponent = null; // de viewcomponent voor de Slides
+public class Presentation
+{
+	private String showTitle; // de titel van de presentatie
+	private ArrayList<Slide> showList = null; // een ArrayList met de Slides
+	private int currentSlideNumber = 0; // het slidenummer van de huidige Slide
+	private SlideViewerComponent slideViewComponent = null; // de viewcomponent voor de Slides
 
-    public Presentation() {
-        slideViewComponent = null;
-        clear();
-    }
+	public Presentation()
+	{
+		slideViewComponent = null;
+		clear();
+	}
 
-    public Presentation(SlideViewerComponent slideViewerComponent) {
-        this.slideViewComponent = slideViewerComponent;
-        clear();
-    }
+	public Presentation(SlideViewerComponent slideViewerComponent)
+	{
+		this.slideViewComponent = slideViewerComponent;
+		clear();
+	}
 
-    public int getSize() {
-        return showList.size();
-    }
+	public int getSize()
+	{
+		return showList.size();
+	}
 
-    public String getTitle() {
-        return showTitle;
-    }
+	public String getTitle()
+	{
+		return showTitle;
+	}
 
-    public void setTitle(String nt) {
-        showTitle = nt;
-    }
+	public void setTitle(String nt)
+	{
+		showTitle = nt;
+	}
 
-    public ArrayList<Slide> getShowList()
-    {
-        return this.showList;
-    }
+	public ArrayList<Slide> getShowList()
+	{
+		return this.showList;
+	}
 
-    public void setShowView(SlideViewerComponent slideViewerComponent) {
-        this.slideViewComponent = slideViewerComponent;
-    }
+	public void setShowView(SlideViewerComponent slideViewerComponent)
+	{
+		this.slideViewComponent = slideViewerComponent;
+	}
 
-    // geef het nummer van de huidige slide
-    public int getSlideNumber() {
-        return currentSlideNumber;
-    }
+	// geef het nummer van de huidige slide
+	public int getSlideNumber()
+	{
+		return currentSlideNumber;
+	}
 
-    // verander het huidige-slide-nummer en laat het aan het window weten.
-    public void setSlideNumber(int number) {
-        currentSlideNumber = number;
-        if (slideViewComponent != null) {
-            slideViewComponent.update(this, getCurrentSlide());
-        }
-    }
+	// verander het huidige-slide-nummer en laat het aan het window weten.
+	public void setSlideNumber(int number)
+	{
+		currentSlideNumber = number;
+		if (slideViewComponent != null)
+		{
+			slideViewComponent.update(this, getCurrentSlide());
+		}
+	}
 
-    // Verwijder de presentatie, om klaar te zijn voor de volgende
-    public void clear() {
-        showList = new ArrayList<Slide>();
-        setSlideNumber(-1);
-    }
+	// Verwijder de presentatie, om klaar te zijn voor de volgende
+	public void clear()
+	{
+		showList = new ArrayList<Slide>();
+		setSlideNumber(-1);
+	}
 
-    // Voeg een slide toe aan de presentatie
-    public void append(Slide slide) {
-        showList.add(slide);
-    }
+	// Voeg een slide toe aan de presentatie
+	public void append(Slide slide)
+	{
+		showList.add(slide);
+	}
 
-    // Geef een slide met een bepaald slidenummer
-    public Slide getSlide(int number) {
-        if (number < 0 || number >= getSize()){
-            return null;
-        }
-        return (Slide)showList.get(number);
-    }
+	// Geef een slide met een bepaald slidenummer
+	public Slide getSlide(int number)
+	{
+		if (number < 0 || number >= getSize())
+		{
+			return null;
+		}
+		return (Slide) showList.get(number);
+	}
 
-    // Geef de huidige Slide
-    public Slide getCurrentSlide() {
-        return getSlide(currentSlideNumber);
-    }
+	// Geef de huidige Slide
+	public Slide getCurrentSlide()
+	{
+		return getSlide(currentSlideNumber);
+	}
 
-    public void exit(int n) {
-        System.exit(n);
-    }
+	public void exit(int n)
+	{
+		System.exit(n);
+	}
 }
 
