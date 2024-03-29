@@ -5,8 +5,9 @@ import javax.swing.JOptionPane;
 
 public class AboutBox
 {
-    public static void show(Frame parent)
+    public static void show()
     {
+        Frame parent = MenuController.getInstance().getFrame();
         JOptionPane.showMessageDialog(parent,
                 "JabberPoint is a primitive slide-show program in Java(tm). It\n" +
                         "is freely copyable as long as you keep this notice and\n" +

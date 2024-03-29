@@ -7,8 +7,6 @@ import Presentation.Presentation;
 public class ShowAbout implements Command
 {
 
-    private AboutBox aboutBox;
-
     @Override
     public String getShortcut()
     {
@@ -18,6 +16,6 @@ public class ShowAbout implements Command
     @Override
     public void execute()
     {
-
+        AboutBox.show();
     }
 }

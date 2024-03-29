@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 
 public class MenuController extends MenuBar {
 
+    private static MenuController menuController;
     private Frame parent; // het frame, alleen gebruikt als ouder voor de Dialogs
     private Presentation presentation; // Er worden commando's gegeven aan de presentatie
 
@@ -41,6 +42,15 @@ public class MenuController extends MenuBar {
     protected static final String IOEX = "IO Exception: ";
     protected static final String LOADERR = "Load Error";
     protected static final String SAVEERR = "Save Error";
+    
+    public static MenuController getInstance()
+    {
+        if (MenuController.menuController == null)
+        {
+            MenuController.menuController = new MenuController(new Frame(""), ControlPresentation.getInstance().getPresentation());
+        }
+        return MenuController.menuController;
+    }
 
     public MenuController(Frame frame, Presentation pres) {
         ControlPresentation controlPresentation = ControlPresentation.getInstance();
@@ -117,10 +127,15 @@ public class MenuController extends MenuBar {
         helpMenu.add(menuItem = mkMenuItem(ABOUT));
         menuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                AboutBox.show(parent);
+            
             }
         });
         setHelpMenu(helpMenu);		// nodig for portability (Motif, etc.).
+    }
+    
+    public Frame getFrame()
+    {
+        return this.parent;
     }
 
     // een menu-item aanmaken
