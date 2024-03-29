@@ -7,9 +7,15 @@ public class Exit implements Command
 {
 
     @Override
-    public String getShortcut()
+    public char getShortcut()
     {
-        return null;
+        return 'Q';
+    }
+
+    @Override
+    public String getLabel()
+    {
+        return "Exit";
     }
 
     @Override

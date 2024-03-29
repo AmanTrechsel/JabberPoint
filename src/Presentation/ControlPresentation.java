@@ -41,4 +41,16 @@ public class ControlPresentation
             presentation.setSlideNumber(presentation.getSlideNumber() + 1);
         }
     }
+
+    // Ga naar een specifieke slide
+    public void setSlideNumber(int slideNumber) {
+        if (slideNumber >= 0 && slideNumber < presentation.getShowList().size()) {
+            presentation.setSlideNumber(slideNumber);
+        }
+    }
+
+    // Wis de presentatie
+    public void clear() {
+        presentation.clear();
+    }
 }

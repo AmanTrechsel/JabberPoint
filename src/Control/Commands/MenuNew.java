@@ -1,27 +1,29 @@
 package Control.Commands;
 
 import Control.Command;
-import Presentation.Presentation;
+import Control.MenuController;
 import Presentation.ControlPresentation;
+import Presentation.Presentation;
 
-public class PageUp implements Command
+public class MenuNew implements Command
 {
 
     @Override
     public char getShortcut()
     {
-        return '.';
+        return 'N';
     }
 
     @Override
     public String getLabel()
     {
-        return "Next";
+        return "New";
     }
 
     @Override
     public void execute()
     {
-        controlPresentation.nextSlide();
+      ControlPresentation.getInstance().clear();
+      MenuController.getInstance().getFrame().repaint();
     }
 }

@@ -7,14 +7,20 @@ public class PageDown implements Command
 {
 
     @Override
-    public String getShortcut()
+    public char getShortcut()
     {
-        return null;
+        return ',';
+    }
+
+    @Override
+    public String getLabel()
+    {
+        return "Previous";
     }
 
     @Override
     public void execute()
     {
-        controlPresentation.nextSlide();
+        controlPresentation.prevSlide();
     }
 }

@@ -8,9 +8,15 @@ public class ShowAbout implements Command
 {
 
     @Override
-    public String getShortcut()
+    public char getShortcut()
     {
-        return null;
+        return 'H';
+    }
+
+    @Override
+    public String getLabel()
+    {
+        return "About";
     }
 
     @Override
