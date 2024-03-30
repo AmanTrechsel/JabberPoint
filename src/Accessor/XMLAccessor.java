@@ -47,7 +47,7 @@ public class XMLAccessor extends Accessor
 	}
 
 	// Laad een bestand
-  @Override
+	@Override
 	public void loadFile(Presentation presentation, String filename) throws IOException
 	{
 		// Variabelen
@@ -153,7 +153,7 @@ public class XMLAccessor extends Accessor
 	}
 
 	// Slaat een presentatie op naar het gegeven bestand
-  @Override
+	@Override
 	public void saveFile(Presentation presentation, String filename) throws IOException
 	{
 		// Maakt een printwriter

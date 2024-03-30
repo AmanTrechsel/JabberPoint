@@ -10,45 +10,46 @@ import javax.swing.JFrame;
 
 public class SlideViewerFrame extends JFrame
 {
-  // Constants
+	// Constants
 	private static final long serialVersionUID = 3227L;
 
 	private static final String JABTITLE = "Jabberpoint 1.6 - OU";
 	public final static int WIDTH = 1200;
 	public final static int HEIGHT = 800;
 
-  // Singleton
+	// Singleton
 	private static SlideViewerFrame slideViewerFrame;
+
 	public static SlideViewerFrame getInstance()
 	{
 		if (SlideViewerFrame.slideViewerFrame == null)
-    {
+		{
 			SlideViewerFrame.slideViewerFrame = new SlideViewerFrame(JABTITLE);
 		}
 
 		return SlideViewerFrame.slideViewerFrame;
 	}
 
-  // Constructor
+	// Constructor
 	private SlideViewerFrame(String title)
 	{
 		super(title);
 
-    // De SlideViewerComponent aanmaken
+		// De SlideViewerComponent aanmaken
 		SlideViewerComponent slideViewerComponent = new SlideViewerComponent(this);
 		ControlPresentation.getInstance().setShowView(slideViewerComponent);
 
-    // De GUI opzetten
+		// De GUI opzetten
 		this.setupWindow(slideViewerComponent);
 	}
 
 	// De GUI opzetten
 	public void setupWindow(SlideViewerComponent slideViewerComponent)
 	{
-    // Zet de titel
+		// Zet de titel
 		this.setTitle(JABTITLE);
 
-    // Voeg een WindowListener toe om de applicatie te sluiten
+		// Voeg een WindowListener toe om de applicatie te sluiten
 		this.addWindowListener(new WindowAdapter()
 		{
 			public void windowClosing(WindowEvent e)
@@ -57,14 +58,14 @@ public class SlideViewerFrame extends JFrame
 			}
 		});
 
-    // Voeg de SlideViewerComponent toe aan de content pane
+		// Voeg de SlideViewerComponent toe aan de content pane
 		this.getContentPane().add(slideViewerComponent);
 
-    // Voeg de KeyController en MenuController toe
+		// Voeg de KeyController en MenuController toe
 		this.addKeyListener(KeyController.getInstance());
 		this.setMenuBar(MenuController.getInstance(this));
 
-    // Zet de grootte en zichtbaarheid
+		// Zet de grootte en zichtbaarheid
 		this.setSize(new Dimension(WIDTH, HEIGHT));
 		this.setVisible(true);
 	}

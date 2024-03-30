@@ -5,7 +5,7 @@ import Presentation.*;
 
 class PlenairDemo extends Accessor
 {
-  @Override
+	@Override
 	public void loadFile(Presentation presentation, String unusedFilename)
 	{
 		presentation.setTitle("Plenair Demo Presentation");
@@ -21,7 +21,7 @@ class PlenairDemo extends Accessor
 		presentation.append(slide);
 	}
 
-  @Override
+	@Override
 	public void saveFile(Presentation presentation, String unusedFilename)
 	{
 		throw new IllegalStateException("Save As->PlenairDemo! aangeroepen");

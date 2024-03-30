@@ -5,10 +5,10 @@ import java.awt.Font;
 
 public class Style
 {
-  // Het lettertype
-  private static final String FONTNAME = "Helvetica";
+	// Het lettertype
+	private static final String FONTNAME = "Helvetica";
 
-  // Bevat de verschillende stijlen voor de verschillende levels
+	// Bevat de verschillende stijlen voor de verschillende levels
 	private static Style[] styles;
 
 	// Fields
@@ -18,7 +18,7 @@ public class Style
 	private int fontSize;
 	private int leading;
 
-  // Maakt de verschillende stijlen aan
+	// Maakt de verschillende stijlen aan
 	public static void createStyles()
 	{
 		Style.styles = new Style[5];
@@ -30,7 +30,7 @@ public class Style
 		Style.styles[4] = new Style(90, Color.black, 24, 10);
 	}
 
-  // Constructor
+	// Constructor
 	public Style(int indent, Color color, int points, int leading)
 	{
 		this.indent = indent;
@@ -39,25 +39,25 @@ public class Style
 		this.leading = leading;
 	}
 
-  // Getter voor de leading
+	// Getter voor de leading
 	public int getLeading()
 	{
 		return this.leading;
 	}
 
-  // Getter voor de indent
+	// Getter voor de indent
 	public int getIndent()
 	{
 		return this.indent;
 	}
 
-  // Getter voor de kleur
+	// Getter voor de kleur
 	public Color getColor()
 	{
 		return this.color;
 	}
 
-  // Haalt de style op voor een bepaald level
+	// Haalt de style op voor een bepaald level
 	public static Style getStyle(int level)
 	{
 		if (level >= Style.styles.length)
@@ -67,14 +67,14 @@ public class Style
 		return Style.styles[level];
 	}
 
-  // Haaalt het lettertype op voor een bepaalde schaal
+	// Haaalt het lettertype op voor een bepaalde schaal
 	public Font getFont(float scale)
 	{
 		return this.font.deriveFont(fontSize * scale);
 	}
 
-  // Converteert de style naar een string
-  @Override
+	// Converteert de style naar een string
+	@Override
 	public String toString()
 	{
 		return "[" + this.indent + "," + this.color + "; " + this.fontSize + " on " + this.leading + "]";

@@ -2,33 +2,34 @@ package Presentation;
 
 public class ControlPresentation
 {
-  // Huidege presentatie
+	// Huidege presentatie
 	private Presentation presentation;
 
-  // Singleton
+	// Singleton
 	private static ControlPresentation controlPresentation;
-  public static ControlPresentation getInstance()
+
+	public static ControlPresentation getInstance()
 	{
 		if (ControlPresentation.controlPresentation == null)
 		{
 			ControlPresentation.controlPresentation = new ControlPresentation();
 		}
-    
+
 		return ControlPresentation.controlPresentation;
 	}
 
-  // Constructor
+	// Constructor
 	private ControlPresentation()
 	{
 	}
 
-  // Getter voor de presentatie
+	// Getter voor de presentatie
 	public Presentation getPresentation()
 	{
 		return this.presentation;
 	}
 
-  // Setter voor de presentatie
+	// Setter voor de presentatie
 	public void setPresentation(Presentation presentation)
 	{
 		this.presentation = presentation;
@@ -67,7 +68,7 @@ public class ControlPresentation
 		this.presentation.clear();
 	}
 
-  // Zet een nieuwe SlideViewerComponent
+	// Zet een nieuwe SlideViewerComponent
 	public void setShowView(SlideViewerComponent slideViewerComponent)
 	{
 		this.presentation.setShowView(slideViewerComponent);

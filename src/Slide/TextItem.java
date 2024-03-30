@@ -156,7 +156,7 @@ public class TextItem extends SlideItem
 	}
 
 	// Converteert het object naar een string
-  @Override
+	@Override
 	public String toString()
 	{
 		return "TextItem[" + this.getLevel() + "," + this.getText() + "]";

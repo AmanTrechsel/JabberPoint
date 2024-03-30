@@ -72,7 +72,7 @@ public class BitmapItem extends SlideItem
 	}
 
 	// Converteert het object naar een string
-  @Override
+	@Override
 	public String toString()
 	{
 		return "BitmapItem[" + this.getLevel() + "," + this.imageName + "]";

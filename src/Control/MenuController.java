@@ -34,7 +34,8 @@ public class MenuController extends MenuBar
 
 	// Singleton
 	private static MenuController menuController;
-  public static MenuController getInstance(SlideViewerFrame frame)
+
+	public static MenuController getInstance(SlideViewerFrame frame)
 	{
 		if (MenuController.menuController == null)
 		{
@@ -44,7 +45,7 @@ public class MenuController extends MenuBar
 		return MenuController.menuController;
 	}
 
-  // Singleton (Zonder SlideViewerFrame)
+	// Singleton (Zonder SlideViewerFrame)
 	public static MenuController getInstance()
 	{
 		if (MenuController.menuController == null)

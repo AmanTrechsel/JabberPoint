@@ -12,8 +12,8 @@ import javax.swing.JFrame;
 
 public class SlideViewerComponent extends JComponent implements PresentationListener
 {
-  // Constants
-  private static final long serialVersionUID = 227L;
+	// Constants
+	private static final long serialVersionUID = 227L;
 
 	private static final Color BGCOLOR = Color.white;
 	private static final Color COLOR = Color.black;
@@ -23,16 +23,16 @@ public class SlideViewerComponent extends JComponent implements PresentationList
 	private static final int XPOS = 1100;
 	private static final int YPOS = 20;
 
-  // Fields
+	// Fields
 	private Slide slide;
 	private Font labelFont = null;
 	private JFrame frame = null;
 
-  // Presentatie variabelen
+	// Presentatie variabelen
 	private int slideNumber;
 	private int presentationSize;
 
-  // Constructor
+	// Constructor
 	public SlideViewerComponent(JFrame frame)
 	{
 		this.setBackground(BGCOLOR);
@@ -40,29 +40,29 @@ public class SlideViewerComponent extends JComponent implements PresentationList
 		this.frame = frame;
 	}
 
-  // Geeft de preferred size
+	// Geeft de preferred size
 	public Dimension getPreferredSize()
 	{
 		return new Dimension(Slide.WIDTH, Slide.HEIGHT);
 	}
 
-  // Receiver voor wanneer de presentatie wordt geupdate
-  @Override
+	// Receiver voor wanneer de presentatie wordt geupdate
+	@Override
 	public void update(Presentation presentation, Slide slide)
 	{
-    // Als de slide null is, repaint
+		// Als de slide null is, repaint
 		if (slide == null)
 		{
 			this.repaint();
 			return;
 		}
 
-    // Update de slide en de slide nummer
+		// Update de slide en de slide nummer
 		this.slide = slide;
 		this.slideNumber = presentation.getSlideNumber();
 		this.presentationSize = presentation.getSize();
 
-    // Repaint en set de title
+		// Repaint en set de title
 		repaint();
 		this.frame.setTitle(presentation.getTitle());
 	}
@@ -70,24 +70,24 @@ public class SlideViewerComponent extends JComponent implements PresentationList
 	// Tekent de slide
 	public void paintComponent(Graphics graphics)
 	{
-    // Teken de achtergrond
+		// Teken de achtergrond
 		graphics.setColor(BGCOLOR);
 
-    // Zet de achtergrond kleur, font en tekst kleur
+		// Zet de achtergrond kleur, font en tekst kleur
 		graphics.fillRect(0, 0, getSize().width, getSize().height);
 		graphics.setFont(this.labelFont);
 		graphics.setColor(COLOR);
 
-    // Als de slide nummer kleiner is dan 0 of de slide null is, return
+		// Als de slide nummer kleiner is dan 0 of de slide null is, return
 		if (this.slideNumber < 0 || this.slide == null)
 		{
 			return;
 		}
 
-    // Geeft de slide nummer weer
+		// Geeft de slide nummer weer
 		graphics.drawString("Slide " + (1 + this.slideNumber) + " of " + this.presentationSize, XPOS, YPOS);
 
-    // Bepaal de area en teken de slide
+		// Bepaal de area en teken de slide
 		Rectangle area = new Rectangle(0, YPOS, getWidth(), (getHeight() - YPOS));
 		slide.draw(graphics, area, this);
 	}

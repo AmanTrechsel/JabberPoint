@@ -16,6 +16,7 @@ public class KeyController extends KeyAdapter
 
 	// Singleton
 	private static KeyController keyController;
+
 	public static KeyController getInstance()
 	{
 		if (KeyController.keyController == null)
