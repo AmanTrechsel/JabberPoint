@@ -7,67 +7,75 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import java.io.IOException;
-
 public class BitmapItem extends SlideItem
 {
-	private BufferedImage bufferedImage;
-	private String imageName;
-
+	// Constants
 	protected static final String FILE = "Bestand ";
 	protected static final String NOTFOUND = " niet gevonden";
 
-	// level staat voor het item-level; name voor de naam van het bestand met de afbeelding
-	public BitmapItem(int level, String name)
+	// BufferedImage voor de afbeelding
+	private BufferedImage bufferedImage;
+
+	// Naam van de afbeelding
+	private String imageName;
+
+	// Constructor
+	public BitmapItem(int level, String imageName)
 	{
 		super(level);
-		imageName = name;
+		this.imageName = imageName;
+
+		// Probeer de afbeelding in te laden
 		try
 		{
-			bufferedImage = ImageIO.read(new File(imageName));
+			this.bufferedImage = ImageIO.read(new File(this.imageName));
 		}
-		catch (IOException e)
+		catch (IOException exception)
 		{
-			System.err.println(FILE + imageName + NOTFOUND);
+			System.err.println(FILE + this.imageName + NOTFOUND);
 		}
 	}
 
-	// Een leeg bitmap-item
+	// Constructor (Zonder level en naam)
 	public BitmapItem()
 	{
 		this(0, null);
 	}
 
-	// geef de bestandsnaam van de afbeelding
+	// Getter voor de naam
 	public String getName()
 	{
-		return imageName;
+		return this.imageName;
 	}
 
-	// geef de bounding box van de afbeelding
-	public Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale, Style myStyle)
+	// Geeft de bounding box
+	@Override
+	public Rectangle getBoundingBox(Graphics graphics, ImageObserver imageObserver, float scale, Style style)
 	{
-		return new Rectangle((int) (myStyle.getIndent() * scale), 0,
-				(int) (bufferedImage.getWidth(observer) * scale),
-				((int) (myStyle.getLeading() * scale)) +
-						(int) (bufferedImage.getHeight(observer) * scale));
+		return new Rectangle((int) (style.getIndent() * scale), 0, (int) (this.bufferedImage.getWidth(imageObserver) * scale), ((int) (style.getLeading() * scale)) + (int) (this.bufferedImage.getHeight(imageObserver) * scale));
 	}
 
-	// teken de afbeelding
-	public void draw(int x, int y, float scale, Graphics g, Style myStyle, ImageObserver observer)
+	// Tekent het item
+	@Override
+	public void draw(int x, int y, float scale, Graphics graphics, Style style, ImageObserver imageObserver)
 	{
-		int width = x + (int) (myStyle.getIndent() * scale);
-		int height = y + (int) (myStyle.getLeading() * scale);
-		g.drawImage(bufferedImage, width, height, (int) (bufferedImage.getWidth(observer) * scale),
-				(int) (bufferedImage.getHeight(observer) * scale), observer);
+		// Bereken de breedte en hoogte
+		int width = x + (int) (style.getIndent() * scale);
+		int height = y + (int) (style.getLeading() * scale);
+
+		// Tekenen van de afbeelding
+		graphics.drawImage(this.bufferedImage, width, height, (int) (this.bufferedImage.getWidth(imageObserver) * scale), (int) (this.bufferedImage.getHeight(imageObserver) * scale), imageObserver);
 	}
 
+	// Converteert het object naar een string
+  @Override
 	public String toString()
 	{
-		return "BitmapItem[" + getLevel() + "," + imageName + "]";
+		return "BitmapItem[" + this.getLevel() + "," + this.imageName + "]";
 	}
 }
 

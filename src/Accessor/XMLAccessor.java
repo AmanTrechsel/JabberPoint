@@ -44,16 +44,16 @@ public class XMLAccessor extends Accessor
 	{
 		NodeList titles = element.getElementsByTagName(tagName);
 		return titles.item(0).getTextContent();
-
 	}
 
 	// Laad een bestand
+  @Override
 	public void loadFile(Presentation presentation, String filename) throws IOException
 	{
 		// Variabelen
 		int slideNumber;
 		int itemNumber;
-		int max = 0;
+		int maxSlides = 0;
 		int maxItems = 0;
 
 		try
@@ -65,17 +65,17 @@ public class XMLAccessor extends Accessor
 			Document document = builder.parse(new File(filename));
 
 			// Haalt de root element op
-			Element doc = document.getDocumentElement();
+			Element documentElement = document.getDocumentElement();
 
 			// Haalt de titel van de presentatie op
-			presentation.setTitle(this.getTitle(doc, SHOWTITLE));
+			presentation.setTitle(this.getTitle(documentElement, SHOWTITLE));
 
 			// Haalt de slides op
-			NodeList slides = doc.getElementsByTagName(SLIDE);
-			max = slides.getLength();
+			NodeList slides = documentElement.getElementsByTagName(SLIDE);
+			maxSlides = slides.getLength();
 
 			// Voor elke slide in de presentatie wordt de slide geladen
-			for (slideNumber = 0; slideNumber < max; slideNumber++)
+			for (slideNumber = 0; slideNumber < maxSlides; slideNumber++)
 			{
 				// Haalt de slide op
 				Element xmlSlide = (Element) slides.item(slideNumber);
@@ -95,15 +95,15 @@ public class XMLAccessor extends Accessor
 				}
 			}
 		}
-		catch (IOException iox)
+		catch (IOException ioException)
 		{
-			System.err.println(iox.toString());
+			System.err.println(ioException.toString());
 		}
-		catch (SAXException sax)
+		catch (SAXException saxException)
 		{
-			System.err.println(sax.getMessage());
+			System.err.println(saxException.getMessage());
 		}
-		catch (ParserConfigurationException pcx)
+		catch (ParserConfigurationException parcerConfigurationException)
 		{
 			System.err.println(PCE);
 		}
@@ -126,7 +126,7 @@ public class XMLAccessor extends Accessor
 			{
 				level = Integer.parseInt(leveltext);
 			}
-			catch (NumberFormatException x)
+			catch (NumberFormatException numberFormatException)
 			{
 				System.err.println(NFE);
 			}
@@ -153,6 +153,7 @@ public class XMLAccessor extends Accessor
 	}
 
 	// Slaat een presentatie op naar het gegeven bestand
+  @Override
 	public void saveFile(Presentation presentation, String filename) throws IOException
 	{
 		// Maakt een printwriter

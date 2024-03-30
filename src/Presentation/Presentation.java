@@ -4,111 +4,116 @@ import Slide.Slide;
 
 import java.util.ArrayList;
 
-
-/**
- * <p>Presentation houdt de slides in de presentatie bij.</p>
- * <p>Er is slechts één instantie van deze klasse aanwezig.</p>
- * @author Ian F. Darwin, ian@darwinsys.com, Gert Florijn, Sylvia Stuurman
- * @version 1.1 2002/12/17 Gert Florijn
- * @version 1.2 2003/11/19 Sylvia Stuurman
- * @version 1.3 2004/08/17 Sylvia Stuurman
- * @version 1.4 2007/07/16 Sylvia Stuurman
- * @version 1.5 2010/03/03 Sylvia Stuurman
- * @version 1.6 2014/05/16 Sylvia Stuurman
- */
-
 public class Presentation
 {
-	private String showTitle; // de titel van de presentatie
-	private ArrayList<Slide> showList = null; // een ArrayList met de Slides
-	private int currentSlideNumber = 0; // het slidenummer van de huidige Slide
-	private SlideViewerComponent slideViewComponent = null; // de viewcomponent voor de Slides
+  // Fields
+	private String showTitle;
+	private ArrayList<Slide> showList;
+	private int currentSlideNumber;
+	private SlideViewerComponent slideViewComponent;
 
-	public Presentation()
-	{
-		slideViewComponent = null;
-		clear();
-	}
-
+  // Constructor
 	public Presentation(SlideViewerComponent slideViewerComponent)
 	{
+    this.showTitle = "";
+    this.showList = new ArrayList<Slide>();
+    this.currentSlideNumber = 0;
 		this.slideViewComponent = slideViewerComponent;
-		clear();
+		this.clear();
 	}
 
-	public int getSize()
+  // Constructor (Zonder SlideViewerComponent)
+	public Presentation()
 	{
-		return showList.size();
+		this.showTitle = "";
+    this.showList = new ArrayList<Slide>();
+    this.currentSlideNumber = 0;
+		this.slideViewComponent = null;
+		this.clear();
 	}
 
+  // Getter voor de titel
 	public String getTitle()
 	{
-		return showTitle;
+		return this.showTitle;
 	}
 
-	public void setTitle(String nt)
+  // Setter voor de titel
+	public void setTitle(String newTitle)
 	{
-		showTitle = nt;
+		this.showTitle = newTitle;
 	}
 
+  // Getter voor de showList
 	public ArrayList<Slide> getShowList()
 	{
 		return this.showList;
 	}
 
+  // Setter voor de SlideViewerComponent
 	public void setShowView(SlideViewerComponent slideViewerComponent)
 	{
 		this.slideViewComponent = slideViewerComponent;
 	}
 
-	// geef het nummer van de huidige slide
+  // Getter voor het huidige-slide-nummer
 	public int getSlideNumber()
 	{
-		return currentSlideNumber;
+		return this.currentSlideNumber;
 	}
 
-	// verander het huidige-slide-nummer en laat het aan het window weten.
+	// Setter voor het huidige-slide-nummer
 	public void setSlideNumber(int number)
 	{
-		currentSlideNumber = number;
-		if (slideViewComponent != null)
+		this.currentSlideNumber = number;
+		if (this.slideViewComponent != null)
 		{
-			slideViewComponent.update(this, getCurrentSlide());
+			this.slideViewComponent.update(this, this.getCurrentSlide());
 		}
+	}
+
+  // Geeft de grootte van de presentatie
+	public int getSize()
+	{
+		return this.showList.size();
 	}
 
 	// Verwijder de presentatie, om klaar te zijn voor de volgende
 	public void clear()
 	{
-		showList = new ArrayList<Slide>();
-		setSlideNumber(-1);
+		this.showList = new ArrayList<Slide>();
+		this.setSlideNumber(-1);
 	}
 
 	// Voeg een slide toe aan de presentatie
 	public void append(Slide slide)
 	{
-		showList.add(slide);
+		this.showList.add(slide);
 	}
 
-	// Geef een slide met een bepaald slidenummer
-	public Slide getSlide(int number)
+	// Geeft de slide met het gegeven index
+	public Slide getSlide(int index)
 	{
-		if (number < 0 || number >= getSize())
+    // Als de index niet bestaat, geef null terug
+		if (index < 0 || index >= getSize())
 		{
 			return null;
 		}
-		return (Slide) showList.get(number);
+
+    // Geef de slide terug
+		return (Slide) this.showList.get(index);
 	}
 
-	// Geef de huidige Slide
+	// Geeft de huidige Slide
 	public Slide getCurrentSlide()
 	{
-		return getSlide(currentSlideNumber);
+		return this.getSlide(this.currentSlideNumber);
 	}
 
-	public void exit(int n)
+  // Sluit de applicatie
+	public void exit(int exitCode)
 	{
-		System.exit(n);
+		System.exit(exitCode);
 	}
 }
 

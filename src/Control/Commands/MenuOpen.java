@@ -38,10 +38,9 @@ public class MenuOpen implements Command
 			xmlAccessor.loadFile(presentation, MenuController.TESTFILE);
 			presentation.setSlideNumber(0);
 		}
-		catch (IOException exc)
+		catch (IOException exception)
 		{
-			JOptionPane.showMessageDialog(parent, MenuController.IOEX + exc, MenuController.LOADERR,
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(parent, MenuController.IOEX + exception, MenuController.LOADERR, JOptionPane.ERROR_MESSAGE);
 		}
 		parent.repaint();
 	}

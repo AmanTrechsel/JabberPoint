@@ -14,109 +14,152 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.ImageObserver;
 import java.text.AttributedString;
 import java.util.List;
-import java.util.Iterator;
 import java.util.ArrayList;
-
 
 public class TextItem extends SlideItem
 {
-	private String text;
-
+	// Standaard tekst als er geen tekst is
 	private static final String EMPTYTEXT = "No Text Given";
 
-	// een textitem van level level, met als tekst string
-	public TextItem(int level, String string)
+	// Bevat de tekst van het item
+	private String text;
+
+	// Contructor
+	public TextItem(int level, String text)
 	{
 		super(level);
-		text = string;
+		this.text = text;
 	}
 
-	// een leeg textitem
+	// Constructor (Zonder level en tekst)
 	public TextItem()
 	{
 		this(0, EMPTYTEXT);
 	}
 
-	// Geef de tekst
+	// Getter voor de tekst
 	public String getText()
 	{
-		return text == null ? "" : text;
+		return this.text == null ? "" : this.text;
 	}
 
-	// geef de AttributedString voor het item
+	// Geeft de AttributedString van de tekst
 	public AttributedString getAttributedString(Style style, float scale)
 	{
-		AttributedString attrStr = new AttributedString(getText());
-		attrStr.addAttribute(TextAttribute.FONT, style.getFont(scale), 0, text.length());
-		return attrStr;
+		AttributedString attributedString = new AttributedString(this.getText());
+		attributedString.addAttribute(TextAttribute.FONT, style.getFont(scale), 0, this.getText().length());
+		return attributedString;
 	}
 
-	// geef de bounding box van het item
-	public Rectangle getBoundingBox(Graphics g, ImageObserver observer,
-																	float scale, Style myStyle)
+	// Geeft de bounding box
+	@Override
+	public Rectangle getBoundingBox(Graphics graphics, ImageObserver imageObserver, float scale, Style style)
 	{
-		List<TextLayout> layouts = getLayouts(g, myStyle, scale);
-		int xsize = 0, ysize = (int) (myStyle.getLeading() * scale);
-		Iterator<TextLayout> iterator = layouts.iterator();
-		while (iterator.hasNext())
+		// Als er geen tekst is, geef een lege rechthoek terug
+		if (this.text == null || this.text.length() == 0)
 		{
-			TextLayout layout = iterator.next();
+			return new Rectangle(0, 0, 0, 0);
+		}
+
+		// Maak een lijst van layouts
+		List<TextLayout> layouts = this.getLayouts(graphics, style, scale);
+
+		// Bereken de grootte van de bounding box
+		int xSize = 0, ySize = (int) (style.getLeading() * scale);
+
+		// Loop door de layouts en bereken de grootte
+		for (TextLayout layout : layouts)
+		{
+			// Haal de bounds van de layout op
 			Rectangle2D bounds = layout.getBounds();
-			if (bounds.getWidth() > xsize)
+
+			// Als de breedte groter is dan xSize, zet xSize op de breedte
+			if (bounds.getWidth() > xSize)
 			{
-				xsize = (int) bounds.getWidth();
+				xSize = (int) bounds.getWidth();
 			}
+
+			// Als de hoogte groter is dan 0, voeg de hoogte toe aan ySize
 			if (bounds.getHeight() > 0)
 			{
-				ysize += bounds.getHeight();
+				ySize += bounds.getHeight();
 			}
-			ysize += layout.getLeading() + layout.getDescent();
+
+			// Voeg de leading en descent toe aan de ySize
+			ySize += layout.getLeading() + layout.getDescent();
 		}
-		return new Rectangle((int) (myStyle.getIndent() * scale), 0, xsize, ysize);
+
+		// Geef de bounding box terug
+		return new Rectangle((int) (style.getIndent() * scale), 0, xSize, ySize);
 	}
 
-	// teken het item
-	public void draw(int x, int y, float scale, Graphics g,
-									 Style myStyle, ImageObserver o)
+	// Tekent het item
+	@Override
+	public void draw(int x, int y, float scale, Graphics graphics, Style style, ImageObserver imageObserver)
 	{
-		if (text == null || text.length() == 0)
+		// Als er geen tekst is, doe niets
+		if (this.text == null || this.text.length() == 0)
 		{
 			return;
 		}
-		List<TextLayout> layouts = getLayouts(g, myStyle, scale);
-		Point pen = new Point(x + (int) (myStyle.getIndent() * scale),
-				y + (int) (myStyle.getLeading() * scale));
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setColor(myStyle.getColor());
-		Iterator<TextLayout> it = layouts.iterator();
-		while (it.hasNext())
+
+		// Maak een lijst van layouts
+		List<TextLayout> layouts = this.getLayouts(graphics, style, scale);
+
+		// Maak een pen aan
+		Point pen = new Point(x + (int) (style.getIndent() * scale), y + (int) (style.getLeading() * scale));
+
+		// Maak een Graphics2D object aan
+		Graphics2D graphics2d = (Graphics2D) graphics;
+		graphics2d.setColor(style.getColor());
+
+		// Loop door de layouts en teken ze
+		for (TextLayout layout : layouts)
 		{
-			TextLayout layout = it.next();
+			// Teken de layout
 			pen.y += layout.getAscent();
-			layout.draw(g2d, pen.x, pen.y);
+			layout.draw(graphics2d, pen.x, pen.y);
 			pen.y += layout.getDescent();
 		}
 	}
 
-	private List<TextLayout> getLayouts(Graphics g, Style s, float scale)
+	// Haalt de layouts op
+	private List<TextLayout> getLayouts(Graphics graphics, Style style, float scale)
 	{
+		// Maak een lijst van layouts
 		List<TextLayout> layouts = new ArrayList<TextLayout>();
-		AttributedString attrStr = getAttributedString(s, scale);
-		Graphics2D g2d = (Graphics2D) g;
-		FontRenderContext frc = g2d.getFontRenderContext();
-		LineBreakMeasurer measurer = new LineBreakMeasurer(attrStr.getIterator(), frc);
-		float wrappingWidth = (Slide.WIDTH - s.getIndent()) * scale;
-		while (measurer.getPosition() < getText().length())
+
+		// Maak een AttributedString aan
+		AttributedString attributedString = this.getAttributedString(style, scale);
+
+		// Maak een Graphics2D object aan
+		Graphics2D graphics2d = (Graphics2D) graphics;
+
+		// Maak een FontRenderContext aan
+		FontRenderContext fontRenderer = graphics2d.getFontRenderContext();
+
+		// Maak een LineBreakMeasurer aan
+		LineBreakMeasurer lineBreakMeasurer = new LineBreakMeasurer(attributedString.getIterator(), fontRenderer);
+
+		// Bereken de wrapping width
+		float wrappingWidth = (Slide.WIDTH - style.getIndent()) * scale;
+
+		// Loop door de tekst en voeg de layouts toe
+		while (lineBreakMeasurer.getPosition() < this.getText().length())
 		{
-			TextLayout layout = measurer.nextLayout(wrappingWidth);
+			TextLayout layout = lineBreakMeasurer.nextLayout(wrappingWidth);
 			layouts.add(layout);
 		}
+
+		// Geef de layouts terug
 		return layouts;
 	}
 
+	// Converteert het object naar een string
+  @Override
 	public String toString()
 	{
-		return "TextItem[" + getLevel() + "," + getText() + "]";
+		return "TextItem[" + this.getLevel() + "," + this.getText() + "]";
 	}
 }
 

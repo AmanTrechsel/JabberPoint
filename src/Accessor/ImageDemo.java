@@ -6,6 +6,7 @@ import Presentation.*;
 
 class ImageDemo extends Accessor
 {
+  @Override
 	public void loadFile(Presentation presentation, String unusedFilename)
 	{
 		presentation.setTitle("Image Demo Presentation");
@@ -38,6 +39,7 @@ class ImageDemo extends Accessor
 		presentation.append(slide);
 	}
 
+  @Override
 	public void saveFile(Presentation presentation, String unusedFilename)
 	{
 		throw new IllegalStateException("Save operation is not supported in Image Demo Presentation");

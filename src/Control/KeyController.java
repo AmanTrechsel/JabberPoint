@@ -27,7 +27,7 @@ public class KeyController extends KeyAdapter
 	}
 
 	// Constructor
-	public KeyController()
+	private KeyController()
 	{
 	}
 

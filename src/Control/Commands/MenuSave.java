@@ -32,9 +32,9 @@ public class MenuSave implements Command
 		{
 			xmlAccessor.saveFile(ControlPresentation.getInstance().getPresentation(), MenuController.SAVEFILE);
 		}
-		catch (IOException exc)
+		catch (IOException exception)
 		{
-			JOptionPane.showMessageDialog(MenuController.getInstance().getFrame(), MenuController.IOEX + exc, MenuController.SAVEERR, JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(MenuController.getInstance().getFrame(), MenuController.IOEX + exception, MenuController.SAVEERR, JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }

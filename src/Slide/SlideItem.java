@@ -6,32 +6,32 @@ import java.awt.Rectangle;
 import java.awt.Graphics;
 import java.awt.image.ImageObserver;
 
-
 public abstract class SlideItem
 {
-	private int level = 0; // het level van het slideitem
+	// Level van het item
+	private int level = 0;
 
-	public SlideItem(int lev)
+	// Constructor
+	public SlideItem(int level)
 	{
-		level = lev;
+		this.level = level;
 	}
 
+	// Constructor (Zonder level)
 	public SlideItem()
 	{
 		this(0);
 	}
 
-	// Geef het level
+	// Getter voor het level
 	public int getLevel()
 	{
-		return level;
+		return this.level;
 	}
 
-	// Geef de bounding box
-	public abstract Rectangle getBoundingBox(Graphics g,
-																					 ImageObserver observer, float scale, Style style);
+	// Geeft de bounding box
+	public abstract Rectangle getBoundingBox(Graphics graphics, ImageObserver imageObserver, float scale, Style style);
 
-	// teken het item
-	public abstract void draw(int x, int y, float scale,
-														Graphics g, Style style, ImageObserver observer);
+	// Tekent het item
+	public abstract void draw(int x, int y, float scale, Graphics graphics, Style style, ImageObserver imageObserver);
 }

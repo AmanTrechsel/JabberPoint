@@ -12,13 +12,8 @@ import javax.swing.JFrame;
 
 public class SlideViewerComponent extends JComponent implements PresentationListener
 {
-	private Slide slide; // de huidige slide
-	private Font labelFont = null; // het font voor labels
-	private JFrame frame = null;
-	private int slideNumber;
-	private int presentationSize;
-
-	private static final long serialVersionUID = 227L;
+  // Constants
+  private static final long serialVersionUID = 227L;
 
 	private static final Color BGCOLOR = Color.white;
 	private static final Color COLOR = Color.black;
@@ -28,46 +23,73 @@ public class SlideViewerComponent extends JComponent implements PresentationList
 	private static final int XPOS = 1100;
 	private static final int YPOS = 20;
 
+  // Fields
+	private Slide slide;
+	private Font labelFont = null;
+	private JFrame frame = null;
+
+  // Presentatie variabelen
+	private int slideNumber;
+	private int presentationSize;
+
+  // Constructor
 	public SlideViewerComponent(JFrame frame)
 	{
-		setBackground(BGCOLOR);
-		labelFont = new Font(FONTNAME, FONTSTYLE, FONTHEIGHT);
+		this.setBackground(BGCOLOR);
+		this.labelFont = new Font(FONTNAME, FONTSTYLE, FONTHEIGHT);
 		this.frame = frame;
 	}
 
+  // Geeft de preferred size
 	public Dimension getPreferredSize()
 	{
 		return new Dimension(Slide.WIDTH, Slide.HEIGHT);
 	}
 
-	public void update(Presentation presentation, Slide data)
+  // Receiver voor wanneer de presentatie wordt geupdate
+  @Override
+	public void update(Presentation presentation, Slide slide)
 	{
-		if (data == null)
+    // Als de slide null is, repaint
+		if (slide == null)
 		{
-			repaint();
+			this.repaint();
 			return;
 		}
-		this.slide = data;
+
+    // Update de slide en de slide nummer
+		this.slide = slide;
 		this.slideNumber = presentation.getSlideNumber();
 		this.presentationSize = presentation.getSize();
+
+    // Repaint en set de title
 		repaint();
-		frame.setTitle(presentation.getTitle());
+		this.frame.setTitle(presentation.getTitle());
 	}
 
-	// teken de slide
-	public void paintComponent(Graphics g)
+	// Tekent de slide
+	public void paintComponent(Graphics graphics)
 	{
-		g.setColor(BGCOLOR);
-		g.fillRect(0, 0, getSize().width, getSize().height);
-		if (this.slideNumber < 0 || slide == null)
+    // Teken de achtergrond
+		graphics.setColor(BGCOLOR);
+
+    // Zet de achtergrond kleur, font en tekst kleur
+		graphics.fillRect(0, 0, getSize().width, getSize().height);
+		graphics.setFont(this.labelFont);
+		graphics.setColor(COLOR);
+
+    // Als de slide nummer kleiner is dan 0 of de slide null is, return
+		if (this.slideNumber < 0 || this.slide == null)
 		{
 			return;
 		}
-		g.setFont(labelFont);
-		g.setColor(COLOR);
-		g.drawString("Slide " + (1 + this.slideNumber) + " of " + this.presentationSize, XPOS, YPOS);
+
+    // Geeft de slide nummer weer
+		graphics.drawString("Slide " + (1 + this.slideNumber) + " of " + this.presentationSize, XPOS, YPOS);
+
+    // Bepaal de area en teken de slide
 		Rectangle area = new Rectangle(0, YPOS, getWidth(), (getHeight() - YPOS));
-		slide.draw(g, area, this);
+		slide.draw(graphics, area, this);
 	}
 }
 

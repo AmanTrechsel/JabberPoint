@@ -22,10 +22,10 @@ public abstract class Accessor
 	}
 
   // Laad een bestand
-	abstract public void loadFile(Presentation p, String fn) throws IOException;
+	abstract public void loadFile(Presentation presentation, String filename) throws IOException;
 
   // Sla een bestand op
-	abstract public void saveFile(Presentation p, String fn) throws IOException;
+	abstract public void saveFile(Presentation presentation, String filename) throws IOException;
 
 }
 

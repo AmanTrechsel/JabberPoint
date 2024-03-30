@@ -2,65 +2,72 @@ package Presentation;
 
 public class ControlPresentation
 {
+  // Huidege presentatie
 	private Presentation presentation;
+
+  // Singleton
 	private static ControlPresentation controlPresentation;
-
-	private ControlPresentation()
-	{
-	}
-
-	public static ControlPresentation getInstance()
+  public static ControlPresentation getInstance()
 	{
 		if (ControlPresentation.controlPresentation == null)
 		{
 			ControlPresentation.controlPresentation = new ControlPresentation();
 		}
+    
 		return ControlPresentation.controlPresentation;
 	}
 
+  // Constructor
+	private ControlPresentation()
+	{
+	}
+
+  // Getter voor de presentatie
 	public Presentation getPresentation()
 	{
 		return this.presentation;
 	}
 
+  // Setter voor de presentatie
 	public void setPresentation(Presentation presentation)
 	{
 		this.presentation = presentation;
 	}
 
-	// ga naar de vorige slide tenzij je aan het begin van de presentatie bent
+	// Gaat naar de vorige slide tenzij je aan het begin van de presentatie bent
 	public void prevSlide()
 	{
-		if (presentation.getSlideNumber() > 0)
+		if (this.presentation.getSlideNumber() > 0)
 		{
-			presentation.setSlideNumber(presentation.getSlideNumber() - 1);
+			this.presentation.setSlideNumber(this.presentation.getSlideNumber() - 1);
 		}
 	}
 
-	// Ga naar de volgende slide tenzij je aan het einde van de presentatie bent.
+	// Gaat naar de volgende slide tenzij je aan het einde van de presentatie bent.
 	public void nextSlide()
 	{
-		if (presentation.getSlideNumber() < (presentation.getShowList().size() - 1))
+		if (this.presentation.getSlideNumber() < (this.presentation.getShowList().size() - 1))
 		{
-			presentation.setSlideNumber(presentation.getSlideNumber() + 1);
+			this.presentation.setSlideNumber(this.presentation.getSlideNumber() + 1);
 		}
 	}
 
-	// Ga naar een specifieke slide
+	// Gaat naar een specifieke slide
 	public void setSlideNumber(int slideNumber)
 	{
 		if (slideNumber >= 0 && slideNumber < presentation.getShowList().size())
 		{
-			presentation.setSlideNumber(slideNumber);
+			this.presentation.setSlideNumber(slideNumber);
 		}
 	}
 
-	// Wis de presentatie
+	// Verwijder de presentatie, om klaar te zijn voor de volgende
 	public void clear()
 	{
-		presentation.clear();
+		this.presentation.clear();
 	}
 
+  // Zet een nieuwe SlideViewerComponent
 	public void setShowView(SlideViewerComponent slideViewerComponent)
 	{
 		this.presentation.setShowView(slideViewerComponent);

@@ -30,7 +30,7 @@ public class SlideViewerFrame extends JFrame
 	}
 
   // Constructor
-	public SlideViewerFrame(String title)
+	private SlideViewerFrame(String title)
 	{
 		super(title);
 
@@ -46,10 +46,10 @@ public class SlideViewerFrame extends JFrame
 	public void setupWindow(SlideViewerComponent slideViewerComponent)
 	{
     // Zet de titel
-		setTitle(JABTITLE);
+		this.setTitle(JABTITLE);
 
     // Voeg een WindowListener toe om de applicatie te sluiten
-		addWindowListener(new WindowAdapter()
+		this.addWindowListener(new WindowAdapter()
 		{
 			public void windowClosing(WindowEvent e)
 			{
@@ -58,15 +58,15 @@ public class SlideViewerFrame extends JFrame
 		});
 
     // Voeg de SlideViewerComponent toe aan de content pane
-		getContentPane().add(slideViewerComponent);
+		this.getContentPane().add(slideViewerComponent);
 
     // Voeg de KeyController en MenuController toe
-		addKeyListener(KeyController.getInstance());
-		setMenuBar(MenuController.getInstance());
+		this.addKeyListener(KeyController.getInstance());
+		this.setMenuBar(MenuController.getInstance(this));
 
     // Zet de grootte en zichtbaarheid
-		setSize(new Dimension(WIDTH, HEIGHT));
-		setVisible(true);
+		this.setSize(new Dimension(WIDTH, HEIGHT));
+		this.setVisible(true);
 	}
 }
 

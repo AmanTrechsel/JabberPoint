@@ -5,6 +5,7 @@ import Presentation.*;
 
 class DemoPresentation extends Accessor
 {
+  @Override
 	public void loadFile(Presentation presentation, String unusedFilename)
 	{
 		presentation.setTitle("Demo Presentation");
@@ -51,6 +52,7 @@ class DemoPresentation extends Accessor
 		presentation.append(slide);
 	}
 
+  @Override
 	public void saveFile(Presentation presentation, String unusedFilename)
 	{
 		throw new IllegalStateException("Save As->Demo! aangeroepen");
