@@ -3,7 +3,7 @@ package Accessor;
 import Slide.Slide;
 import Presentation.*;
 
-class DemoPresentation extends Accessor
+public class DemoPresentation extends Accessor
 {
 	@Override
 	public void loadFile(Presentation presentation, String unusedFilename)

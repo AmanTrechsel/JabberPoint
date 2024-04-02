@@ -20,6 +20,7 @@ public class MenuController extends MenuBar
 
 	protected static final String FILE = "File";
 	protected static final String VIEW = "View";
+	protected static final String DEMO = "Demos";
 	protected static final String HELP = "Help";
 
 	public static final String TESTFILE = "test.xml";
@@ -78,6 +79,12 @@ public class MenuController extends MenuBar
 		viewCommands.add(new PageDown());
 		viewCommands.add(new PageUp());
 		viewCommands.add(new PageGoTo());
+		
+		// Alle "Demo" menu-items
+		ArrayList<Command> demoCommands = new ArrayList<Command>();
+		demoCommands.add(new MenuDemoBase());
+		demoCommands.add(new MenuDemoImage());
+		demoCommands.add(new MenuDemoPlenair());
 
 		// Alle "Help" menu-items
 		ArrayList<Command> helpCommands = new ArrayList<Command>();
@@ -86,6 +93,7 @@ public class MenuController extends MenuBar
 		// Menu's toevogen
 		add(this.createMenu(FILE, fileCommands, true));
 		add(this.createMenu(VIEW, viewCommands, false));
+		add(this.createMenu(DEMO, demoCommands, false));
 		setHelpMenu(this.createMenu(HELP, helpCommands, false));
 	}
 

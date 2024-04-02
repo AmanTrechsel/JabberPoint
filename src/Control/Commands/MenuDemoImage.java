@@ -1,29 +1,28 @@
 package Control.Commands;
 
-import java.awt.Frame;
-import java.io.IOException;
-
-import javax.swing.*;
-
 import Accessor.Accessor;
-import Accessor.XMLAccessor;
+import Accessor.ImageDemo;
 import Control.Command;
 import Control.MenuController;
 import Presentation.ControlPresentation;
 import Presentation.Presentation;
 
-public class MenuOpen implements Command
+import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
+
+public class MenuDemoImage implements Command
 {
 	@Override
 	public String getLabel()
 	{
-		return "Open";
+		return "Image Demo";
 	}
 
 	@Override
 	public char getShortcut()
 	{
-		return 'O';
+		return '2';
 	}
 
 	@Override
@@ -31,13 +30,11 @@ public class MenuOpen implements Command
 	{
 		ControlPresentation.getInstance().clear();
 		Frame parent = MenuController.getInstance().getFrame();
-		Accessor xmlAccessor = new XMLAccessor();
-		JFileChooser fileChooser = new JFileChooser();
-		fileChooser.showOpenDialog(parent);
+		Accessor demoPresentation = new ImageDemo();
 		try
 		{
 			Presentation presentation = ControlPresentation.getInstance().getPresentation();
-			xmlAccessor.loadFile(presentation, fileChooser.getSelectedFile().getPath());
+			demoPresentation.loadFile(presentation, null);
 			presentation.setSlideNumber(0);
 		}
 		catch (IOException exception)

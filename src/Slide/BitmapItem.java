@@ -14,8 +14,9 @@ import javax.imageio.ImageIO;
 public class BitmapItem extends SlideItem
 {
 	// Constants
+	protected static final String NOT_FOUND_IMAGE_PATH = "src/main/resources/images/not-found.jpg";
 	protected static final String FILE = "Bestand ";
-	protected static final String NOTFOUND = " niet gevonden";
+	protected static final String NOT_FOUND = " niet gevonden";
 
 	// BufferedImage voor de afbeelding
 	private BufferedImage bufferedImage;
@@ -36,7 +37,17 @@ public class BitmapItem extends SlideItem
 		}
 		catch (IOException exception)
 		{
-			System.err.println(FILE + this.imageName + NOTFOUND);
+			System.out.println(FILE + this.imageName + NOT_FOUND);
+			
+			// Probeer de not found image te laden
+			try
+			{
+				this.bufferedImage = ImageIO.read(new File(NOT_FOUND_IMAGE_PATH));
+			}
+			catch (IOException notFoundException)
+			{
+				System.err.println(FILE + this.imageName + NOT_FOUND);
+			}
 		}
 	}
 

@@ -6,6 +6,7 @@ import java.awt.event.KeyAdapter;
 import Control.Commands.Exit;
 import Control.Commands.PageDown;
 import Control.Commands.PageUp;
+import Presentation.ControlPresentation;
 
 public class KeyController extends KeyAdapter
 {

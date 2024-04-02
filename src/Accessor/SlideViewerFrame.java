@@ -37,7 +37,7 @@ public class SlideViewerFrame extends JFrame
 
 		// De SlideViewerComponent aanmaken
 		SlideViewerComponent slideViewerComponent = new SlideViewerComponent(this);
-		ControlPresentation.getInstance().setShowView(slideViewerComponent);
+		ControlPresentation.getInstance().getPresentation().addPresentationListener(slideViewerComponent);
 
 		// De GUI opzetten
 		this.setupWindow(slideViewerComponent);

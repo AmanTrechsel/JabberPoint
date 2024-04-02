@@ -67,10 +67,4 @@ public class ControlPresentation
 	{
 		this.presentation.clear();
 	}
-
-	// Zet een nieuwe SlideViewerComponent
-	public void setShowView(SlideViewerComponent slideViewerComponent)
-	{
-		this.presentation.setShowView(slideViewerComponent);
-	}
 }

@@ -4,7 +4,7 @@ import Slide.Slide;
 import Slide.BitmapItem;
 import Presentation.*;
 
-class ImageDemo extends Accessor
+public class ImageDemo extends Accessor
 {
 	@Override
 	public void loadFile(Presentation presentation, String unusedFilename)
