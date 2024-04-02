@@ -23,7 +23,6 @@ public class MenuController extends MenuBar
 	protected static final String DEMO = "Demos";
 	protected static final String HELP = "Help";
 
-	public static final String TESTFILE = "test.xml";
 	public static final String SAVEFILE = "dump.xml";
 
 	public static final String IOEX = "IO Exception: ";
