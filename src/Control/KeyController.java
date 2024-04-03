@@ -44,13 +44,13 @@ public class KeyController extends KeyAdapter
 			case KeyEvent.VK_ENTER:
 			case '+':
 				// Ga naar de volgende slide (PageDown, Down, Enter, +)
-				NEXT_SLIDE_COMMAND.execute();
+				PREVIOUS_SLIDE_COMMAND.execute();
 				break;
 			case KeyEvent.VK_PAGE_UP:
 			case KeyEvent.VK_UP:
 			case '-':
 				// Ga naar de vorige slide (PageUp, Up, -)
-				PREVIOUS_SLIDE_COMMAND.execute();
+				NEXT_SLIDE_COMMAND.execute();
 				break;
 			case 'q':
 			case 'Q':
