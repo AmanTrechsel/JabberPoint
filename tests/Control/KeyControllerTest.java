@@ -4,6 +4,8 @@ import Jabberpoint.JabberPoint;
 import Presentation.ControlPresentation;
 import Presentation.Presentation;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,8 +22,7 @@ public class KeyControllerTest {
     private Component dummyComponent;
 
     @BeforeEach
-    void setup() throws IOException
-    {
+    void setup() throws IOException {
         keyController = KeyController.getInstance();
         dummyComponent = new JFrame();
         JabberPoint.initialize(new String[0]);
@@ -29,25 +30,20 @@ public class KeyControllerTest {
         presentation = controlPresentation.getPresentation();
     }
 
-    @Test
-    public void keyController_nextPage_PageDown_expectPass() {
+    @ParameterizedTest
+    @ValueSource(ints = { KeyEvent.VK_PAGE_DOWN, KeyEvent.VK_DOWN, KeyEvent.VK_ENTER, '+' })
+    void keyController_nextPage(int keyCode) {
         assertEquals(0, presentation.getSlideNumber());
-        keyController.keyPressed(new KeyEvent(dummyComponent, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_PAGE_DOWN, 'a'));
+        keyController.keyPressed(new KeyEvent(dummyComponent, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, keyCode, 'a'));
         assertEquals(1, presentation.getSlideNumber());
     }
 
-    @Test
-    public void keyController_nextPage_Down_expectPass() {
-        assertEquals(0, presentation.getSlideNumber());
-        keyController.keyPressed(new KeyEvent(dummyComponent, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_DOWN, 'a'));
+    @ParameterizedTest
+    @ValueSource(ints = { KeyEvent.VK_PAGE_UP, KeyEvent.VK_UP, '-' })
+    void keyController_prevPage(int keyCode) {
+        presentation.setSlideNumber(1);
         assertEquals(1, presentation.getSlideNumber());
-    }
-
-    @Test
-    public void keyController_nextPage_Enter_expectPass() {
+        keyController.keyPressed(new KeyEvent(dummyComponent, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, keyCode, 'a'));
         assertEquals(0, presentation.getSlideNumber());
-        keyController.keyPressed(new KeyEvent(dummyComponent, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, KeyEvent.VK_ENTER, 'a'));
-        assertEquals(1, presentation.getSlideNumber());
     }
 }
-
