@@ -11,13 +11,6 @@
             <property name="allowEmptyConstructors" value="true"/>
             <property name="allowEmptyMethods" value="true"/>
         </module>
-        <module name="JavadocStyle">
-            <property name="checkEmptyJavadoc" value="false"/>
-            <property name="scope" value="public"/>
-        </module>
-        <module name="JavadocParagraph">
-            <property name="scope" value="public"/>
-        </module>
         <module name="Indentation">
             <property name="basicOffset" value="2"/>
             <property name="caseIndent" value="4"/>
