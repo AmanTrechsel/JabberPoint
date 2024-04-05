@@ -15,20 +15,21 @@ public class ImageDemo extends Accessor
 		slide.setTitle("Introduction");
 		slide.append(1, "Welcome to the Image Demo Presentation");
 		slide.append(2, "This presentation showcases the usage of images.");
+		slide.append(new BitmapItem(1, "src/main/resources/images/demo1.jpg"));
 		slide.append(2, "Let's get started!");
 		presentation.append(slide);
 
 		slide = new Slide();
 		slide.setTitle("Using Images");
 		slide.append(1, "Here we have an image of a beautiful landscape:");
-		slide.append(new BitmapItem(1, "JabberPoint.jpg"));
+		slide.append(new BitmapItem(1, "src/main/resources/images/demo2.jpg"));
 		slide.append(2, "Isn't it lovely?");
 		presentation.append(slide);
 
 		slide = new Slide();
 		slide.setTitle("More Images");
 		slide.append(1, "Now, let's see another image:");
-		slide.append(new BitmapItem(1, "JabberPoint.jpg"));
+		slide.append(new BitmapItem(1, "src/main/resources/images/demo3.jpg"));
 		slide.append(2, "These flowers are breathtaking!");
 		presentation.append(slide);
 
