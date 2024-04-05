@@ -39,8 +39,8 @@ class AccessorTest
 	public void plenairDemo_loadFile_expectToLoad() throws IOException
 	{
 		assertDoesNotThrow(() -> new PlenairDemo().loadFile(this.presentation, ""));
-		assertEquals("Plenair Demo Presentation", this.presentation.getTitle());
-		assertEquals(2, this.presentation.getSize());
+		assertEquals("Plenary Meeting Demo", this.presentation.getTitle());
+		assertEquals(7, this.presentation.getSize());
 	}
 
 	@Test
