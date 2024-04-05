@@ -12,7 +12,7 @@ Versiebeheer wordt gedaan via Github en er wordt gebruik gemaakt van Github acti
 ### Develop
 Op deze branch wordt actief gewerkt aan het aanpassen en updaten van code. De github actions die doorlopen worden zijn:
 1. Unit Tests uitvoeren (Push & Pull Request)
-2. Styles Checken (Push & Pull Request)
+2. Styles Checken (Push)
 3. Maken van een Jar bestand (Pull Request)
 
 Als een van deze stappen niet volledig voltooid is wordt er een issue aangemaakt.
@@ -21,7 +21,7 @@ Deze branch is puur bedoelt voor het testen van het programma. De stappen die do
 ### Acceptance
 Deze branch bevat de laatste release versie. Hier worden de laatste checks gedaan of het programma wel voldoet aan criteria. De github actions die doorlopen worden zijn:
 1. Unit Tests uitvoeren (Push & Pull Request)
-2. Styles Checken (Push & Pull Request)
+2. Styles Checken (Push)
 3. Maken van een Jar bestand (Push & Pull Request)
 4. Een release uitbrengen op basis van de Jar bestand (Push & Pull Request)
 
