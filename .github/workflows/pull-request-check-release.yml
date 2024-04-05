@@ -124,7 +124,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./staging/*.jar
-          asset_name: ${{ files.upload-release-asset.outputs.name }
+          asset_name: ${{ files.upload-release-asset.outputs.name }}
           asset_content_type: application/java-archive
 
   write-comment-on-unit-test-failure:
