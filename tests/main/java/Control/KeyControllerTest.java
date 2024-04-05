@@ -23,7 +23,7 @@ public class KeyControllerTest
 	private Component dummyComponent;
 
 	@BeforeEach
-	void setup() throws IOException
+	public void setup() throws IOException
 	{
 		this.keyController = KeyController.getInstance();
 		this.dummyComponent = new JFrame();

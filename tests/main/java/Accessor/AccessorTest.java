@@ -20,7 +20,7 @@ class AccessorTest
 	}
 
 	@Test
-	void demoPresentation_loadFile_expectToLoad() throws IOException
+	public void demoPresentation_loadFile_expectToLoad() throws IOException
 	{
 		assertDoesNotThrow(() -> new DemoPresentation().loadFile(this.presentation, ""));
 		assertEquals("Demo Presentation", this.presentation.getTitle());
@@ -28,7 +28,7 @@ class AccessorTest
 	}
 
 	@Test
-	void imageDemo_loadFile_expectToLoad() throws IOException
+	public void imageDemo_loadFile_expectToLoad() throws IOException
 	{
 		assertDoesNotThrow(() -> new ImageDemo().loadFile(this.presentation, ""));
 		assertEquals("Image Demo Presentation", this.presentation.getTitle());
@@ -36,7 +36,7 @@ class AccessorTest
 	}
 
 	@Test
-	void plenairDemo_loadFile_expectToLoad() throws IOException
+	public void plenairDemo_loadFile_expectToLoad() throws IOException
 	{
 		assertDoesNotThrow(() -> new PlenairDemo().loadFile(this.presentation, ""));
 		assertEquals("Plenair Demo Presentation", this.presentation.getTitle());
@@ -44,14 +44,14 @@ class AccessorTest
 	}
 
 	@Test
-	void xmlAccessor_loadFile_expectToLoad() throws IOException
+	public void xmlAccessor_loadFile_expectToLoad() throws IOException
 	{
 		assertDoesNotThrow(() -> new XMLAccessor().loadFile(this.presentation, "test.xml"));
 		assertEquals("Test", this.presentation.getTitle());
 	}
 
 	@Test
-	void xmlAccessor_loadFile_expectToNotLoad() throws IOException
+	public void xmlAccessor_loadFile_expectToNotLoad() throws IOException
 	{
 		new XMLAccessor().loadFile(this.presentation, "notAnActualFile.xml");
 		assertEquals("", this.presentation.getTitle());

@@ -11,25 +11,25 @@ import static org.junit.jupiter.api.Assertions.*;
 class PresentationTest
 {
 	@BeforeEach
-	void setup() throws IOException
+	public void setup() throws IOException
 	{
 		JabberPoint.initialize(new String[0]);
 	}
 
 	@Test
-	void getInstance_expectsNotNull()
+	public void getInstance_expectsNotNull()
 	{
 		assertNotNull(ControlPresentation.getInstance());
 	}
 
 	@Test
-	void getPresentation_expectsNotNull()
+	public void getPresentation_expectsNotNull()
 	{
 		assertNotNull(ControlPresentation.getInstance().getPresentation());
 	}
 
 	@Test
-	void setPresentation_toNewPresentation_expectsToBeNewPresentation()
+	public void setPresentation_toNewPresentation_expectsToBeNewPresentation()
 	{
 		Presentation newPresentation = new Presentation();
 		newPresentation.setTitle("Test");
@@ -39,7 +39,7 @@ class PresentationTest
 	}
 
 	@Test
-	void prevSlide_from2_expectsToBe1()
+	public void prevSlide_from2_expectsToBe1()
 	{
 		assertDoesNotThrow(() -> ControlPresentation.getInstance().getPresentation().setSlideNumber(2));
 		assertEquals(2, ControlPresentation.getInstance().getPresentation().getSlideNumber());
@@ -48,7 +48,7 @@ class PresentationTest
 	}
 
 	@Test
-	void prevSlide_from0_expectsToBe0()
+	public void prevSlide_from0_expectsToBe0()
 	{
 		assertDoesNotThrow(() -> ControlPresentation.getInstance().getPresentation().setSlideNumber(0));
 		assertEquals(0, ControlPresentation.getInstance().getPresentation().getSlideNumber());
@@ -57,7 +57,7 @@ class PresentationTest
 	}
 
 	@Test
-	void nextSlide_from1_expectsToBe2()
+	public void nextSlide_from1_expectsToBe2()
 	{
 		assertDoesNotThrow(() -> ControlPresentation.getInstance().getPresentation().setSlideNumber(1));
 		assertEquals(1, ControlPresentation.getInstance().getPresentation().getSlideNumber());
@@ -66,7 +66,7 @@ class PresentationTest
 	}
 
 	@Test
-	void nextSlide_fromCapacity_expectsToBeCapacity()
+	public void nextSlide_fromCapacity_expectsToBeCapacity()
 	{
 		int capacity = ControlPresentation.getInstance().getPresentation().getSize() - 1;
 		assertDoesNotThrow(() -> ControlPresentation.getInstance().getPresentation().setSlideNumber(capacity));
@@ -76,21 +76,21 @@ class PresentationTest
 	}
 
 	@Test
-	void setSlideNumber_fromNegative_expectsToBe0()
+	public void setSlideNumber_fromNegative_expectsToBe0()
 	{
 		assertDoesNotThrow(() -> ControlPresentation.getInstance().setSlideNumber(-1));
 		assertEquals(0, ControlPresentation.getInstance().getPresentation().getSlideNumber());
 	}
 
 	@Test
-	void setSlideNumber_from2_expectsToBe2()
+	public void setSlideNumber_from2_expectsToBe2()
 	{
 		assertDoesNotThrow(() -> ControlPresentation.getInstance().setSlideNumber(2));
 		assertEquals(2, ControlPresentation.getInstance().getPresentation().getSlideNumber());
 	}
 
 	@Test
-	void clear_expectsSizeToBe0()
+	public void clear_expectsSizeToBe0()
 	{
 		assertEquals(4, ControlPresentation.getInstance().getPresentation().getSize());
 		assertDoesNotThrow(() -> ControlPresentation.getInstance().clear());

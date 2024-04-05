@@ -18,7 +18,7 @@ class CommandTests
 	private PageDown pageDown;
 
 	@BeforeEach
-	void setup() throws IOException
+	public void setup() throws IOException
 	{
 		JabberPoint.initialize(new String[0]);
 		this.controlPresentation = ControlPresentation.getInstance();
@@ -28,7 +28,7 @@ class CommandTests
 	}
 
 	@Test
-	void pageUp_execute_expectPass()
+	public void pageUp_execute_expectPass()
 	{
 		assertEquals(0, this.presentation.getSlideNumber());
 		this.pageUp.execute();
@@ -36,7 +36,7 @@ class CommandTests
 	}
 
 	@Test
-	void pageDown_execute_expectPass()
+	public void pageDown_execute_expectPass()
 	{
 		assertEquals(0, this.presentation.getSlideNumber());
 		this.pageUp.execute();

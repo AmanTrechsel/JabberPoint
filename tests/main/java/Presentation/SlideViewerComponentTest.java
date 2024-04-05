@@ -14,14 +14,14 @@ class SlideViewerComponentTest
 	private SlideViewerComponent slideViewerComponent;
 
 	@BeforeEach
-	void setup() throws IOException
+	public void setup() throws IOException
 	{
 		JabberPoint.initialize(new String[0]);
 		this.slideViewerComponent = new SlideViewerComponent();
 	}
 
 	@Test
-	void update_withControlPresentation_expectsPresentationToBeControlPresentation()
+	public void update_withControlPresentation_expectsPresentationToBeControlPresentation()
 	{
 		Presentation controlPresentation = ControlPresentation.getInstance().getPresentation();
 		Slide newSlide = new Slide();
@@ -31,7 +31,7 @@ class SlideViewerComponentTest
 	}
 
 	@Test
-	void update_withoutSlide_expectsSlideToBeNull()
+	public void update_withoutSlide_expectsSlideToBeNull()
 	{
 		assertDoesNotThrow(() -> this.slideViewerComponent.update(new Presentation(), null));
 		assertNull(this.slideViewerComponent.getSlide());

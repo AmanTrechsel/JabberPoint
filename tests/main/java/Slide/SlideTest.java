@@ -12,20 +12,20 @@ class SlideTest
 	private Slide slide;
 
 	@BeforeEach
-	void setup()
+	public void setup()
 	{
 		this.slide = new Slide();
 	}
 
 	@Test
-	void slide_setTitle_toTest_expectsTest()
+	public void slide_setTitle_toTest_expectsTest()
 	{
 		assertDoesNotThrow(() -> this.slide.setTitle("Test"));
 		assertEquals("Test", this.slide.getTitle());
 	}
 
 	@Test
-	void slide_append_oneItem_expectsSizeToBe1()
+	public void slide_append_oneItem_expectsSizeToBe1()
 	{
 		TextItem textItem = new TextItem(0, "Test");
 		assertEquals(0, this.slide.getSize());
@@ -36,28 +36,28 @@ class SlideTest
 	}
 
 	@Test
-	void bitmapItem_getName_withNonExistentImage_expectsNotFoundImageName()
+	public void bitmapItem_getName_withNonExistentImage_expectsNotFoundImageName()
 	{
 		BitmapItem bitmapItem = new BitmapItem(0, "NotARealImage");
 		assertEquals(BitmapItem.NOT_FOUND_IMAGE_NAME, bitmapItem.getName());
 	}
 
 	@Test
-	void bitmapItem_getName_withNotFoundImagePath_expectsNotFoundImagePath()
+	public void bitmapItem_getName_withNotFoundImagePath_expectsNotFoundImagePath()
 	{
 		BitmapItem bitmapItem = new BitmapItem(0, BitmapItem.NOT_FOUND_IMAGE_PATH);
 		assertEquals(BitmapItem.NOT_FOUND_IMAGE_PATH, bitmapItem.getName());
 	}
 
 	@Test
-	void textItem_getText_withNull_expectsEmptyString()
+	public void textItem_getText_withNull_expectsEmptyString()
 	{
 		TextItem textItem = new TextItem(0, null);
 		assertEquals("", textItem.getText());
 	}
 
 	@Test
-	void textItem_getText_withText_expectsText()
+	public void textItem_getText_withText_expectsText()
 	{
 		TextItem textItem = new TextItem(0, "Text");
 		assertEquals("Text", textItem.getText());
