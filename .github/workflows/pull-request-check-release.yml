@@ -65,6 +65,7 @@ jobs:
   
   create_release:
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
