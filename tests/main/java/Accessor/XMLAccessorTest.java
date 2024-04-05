@@ -20,14 +20,14 @@ class XMLAccessorTest
 	}
 
 	@Test
-	void xmlAccessor_loadFile_expectToLoad() throws IOException
+	void loadFile_expectToLoad() throws IOException
 	{
 		assertDoesNotThrow(() -> new XMLAccessor().loadFile(this.presentation, "test.xml"));
 		assertEquals("Test", this.presentation.getTitle());
 	}
 
 	@Test
-	void xmlAccessor_loadFile_expectToNotLoad() throws IOException
+	void loadFile_expectToNotLoad() throws IOException
 	{
 		new XMLAccessor().loadFile(this.presentation, "notAnActualFile.xml");
 		assertEquals("", this.presentation.getTitle());

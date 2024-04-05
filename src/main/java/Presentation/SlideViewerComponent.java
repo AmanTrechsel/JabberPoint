@@ -48,7 +48,19 @@ public class SlideViewerComponent extends JComponent implements PresentationList
 		this.labelFont = new Font(FONTNAME, FONTSTYLE, FONTHEIGHT);
 		this.frame = SlideViewerFrame.getInstance();
 	}
-	
+
+	// Getter voor presentationSize
+	public int getPresentationSize()
+	{
+		return this.presentationSize;
+	}
+
+	// Getter voor slide
+	public Slide getSlide()
+	{
+		return slide;
+	}
+
 	// Geeft de preferred size
 	public Dimension getPreferredSize()
 	{
