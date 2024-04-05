@@ -85,7 +85,9 @@ jobs:
           prerelease: false
         
       - name: Log
-        run: ls -al
+        run: |
+          cd target
+          ls -al
 
       - name: Upload Release Asset
         id: upload-release-asset 
