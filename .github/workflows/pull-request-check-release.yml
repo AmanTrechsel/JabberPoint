@@ -83,6 +83,9 @@ jobs:
             Release v${{ secrets.VERSION }}
           draft: false
           prerelease: false
+        
+      - name: Log
+        run: ls -al
 
       - name: Upload Release Asset
         id: upload-release-asset 
