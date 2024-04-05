@@ -17,6 +17,7 @@ public class BitmapItem extends SlideItem
 	protected static final String NOT_FOUND_IMAGE_PATH = "src/main/resources/images/not-found.jpg";
 	protected static final String FILE = "Bestand ";
 	protected static final String NOT_FOUND = " niet gevonden";
+	protected static final String NOT_FOUND_IMAGE_NAME = "not-found";
 
 	// BufferedImage voor de afbeelding
 	private BufferedImage bufferedImage;
@@ -43,6 +44,7 @@ public class BitmapItem extends SlideItem
 			try
 			{
 				this.bufferedImage = ImageIO.read(new File(NOT_FOUND_IMAGE_PATH));
+				this.imageName = NOT_FOUND_IMAGE_NAME;
 			}
 			catch (IOException notFoundException)
 			{
