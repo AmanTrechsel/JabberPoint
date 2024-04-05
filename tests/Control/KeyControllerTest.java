@@ -23,27 +23,27 @@ public class KeyControllerTest {
 
     @BeforeEach
     void setup() throws IOException {
-        keyController = KeyController.getInstance();
-        dummyComponent = new JFrame();
+        this.keyController = KeyController.getInstance();
+        this.dummyComponent = new JFrame();
         JabberPoint.initialize(new String[0]);
-        controlPresentation = ControlPresentation.getInstance();
-        presentation = controlPresentation.getPresentation();
+        this.controlPresentation = ControlPresentation.getInstance();
+        this.presentation = this.controlPresentation.getPresentation();
     }
 
     @ParameterizedTest
     @ValueSource(ints = { KeyEvent.VK_PAGE_DOWN, KeyEvent.VK_DOWN, KeyEvent.VK_ENTER, '+' })
     void keyController_nextPage(int keyCode) {
-        assertEquals(0, presentation.getSlideNumber());
-        keyController.keyPressed(new KeyEvent(dummyComponent, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, keyCode, 'a'));
-        assertEquals(1, presentation.getSlideNumber());
+        assertEquals(0, this.presentation.getSlideNumber());
+        this.keyController.keyPressed(new KeyEvent(this.dummyComponent, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, keyCode, 'a'));
+        assertEquals(1, this.presentation.getSlideNumber());
     }
 
     @ParameterizedTest
     @ValueSource(ints = { KeyEvent.VK_PAGE_UP, KeyEvent.VK_UP, '-' })
     void keyController_prevPage(int keyCode) {
-        presentation.setSlideNumber(1);
-        assertEquals(1, presentation.getSlideNumber());
-        keyController.keyPressed(new KeyEvent(dummyComponent, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, keyCode, 'a'));
-        assertEquals(0, presentation.getSlideNumber());
+        this.presentation.setSlideNumber(1);
+        assertEquals(1, this.presentation.getSlideNumber());
+        this.keyController.keyPressed(new KeyEvent(this.dummyComponent, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, keyCode, 'a'));
+        assertEquals(0, this.presentation.getSlideNumber());
     }
 }

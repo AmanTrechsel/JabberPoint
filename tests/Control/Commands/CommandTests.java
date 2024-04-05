@@ -20,29 +20,28 @@ class CommandTests
     @BeforeEach
     void setup() throws IOException {
         JabberPoint.initialize(new String[0]);
-        controlPresentation = ControlPresentation.getInstance();
-        presentation = controlPresentation.getPresentation();
-        pageUp = new PageUp();
-        pageDown = new PageDown();
+        this.controlPresentation = ControlPresentation.getInstance();
+        this.presentation = this.controlPresentation.getPresentation();
+        this.pageUp = new PageUp();
+        this.pageDown = new PageDown();
     }
-
 
     @Test
     void pageUp_execute_expectPass()
     {
-        assertEquals(0, presentation.getSlideNumber());
-        pageUp.execute();
-        assertEquals(1, presentation.getSlideNumber());
+        assertEquals(0, this.presentation.getSlideNumber());
+        this.pageUp.execute();
+        assertEquals(1, this.presentation.getSlideNumber());
     }
 
     @Test
     void pageDown_execute_expectPass()
     {
-        assertEquals(0, presentation.getSlideNumber());
-        pageUp.execute();
-        assertEquals(1, presentation.getSlideNumber());
-        pageDown.execute();
-        assertEquals(0, presentation.getSlideNumber());
+        assertEquals(0, this.presentation.getSlideNumber());
+        this.pageUp.execute();
+        assertEquals(1, this.presentation.getSlideNumber());
+        this.pageDown.execute();
+        assertEquals(0, this.presentation.getSlideNumber());
     }
 
 }
