@@ -73,14 +73,28 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const existingRelease = await github.repos.getReleaseByTag({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              tag: 'v${{ secrets.VERSION }}'
-            });
+            const octokit = require('@octokit/rest');
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const tag_name = `v${{ secrets.VERSION }}`;
 
-            if (existingRelease) {
-              core.setFailed('Release already exists for tag v${{ secrets.VERSION }}');
+            const octo = new octokit({ auth: process.env.GITHUB_TOKEN });
+
+            try {
+              const release = await octo.repos.getReleaseByTag({
+                owner,
+                repo,
+                tag_name
+              });
+              if (release.data) {
+                console.log('Release already exists for tag v${{ secrets.VERSION }}');
+                core.setOutput('release_exists', true);
+              } else {
+                core.setOutput('release_exists', false);
+              }
+            } catch (error) {
+              console.log('No release found for tag v${{ secrets.VERSION }}');
+              core.setOutput('release_exists', false);
             }
 
       - name: Create tag
@@ -104,7 +118,7 @@ jobs:
 
       - name: Create Release (Only if release doesn't exist)
         id: create_release
-        if: steps.check_release.outputs != ''
+        if: steps.check_release.outputs.release_exists == 'false'
         uses: actions/create-release@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
