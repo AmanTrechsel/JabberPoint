@@ -63,7 +63,6 @@ jobs:
           name: build
           path: staging
   
-  YAML
 jobs:
   create_release:
     runs-on: ubuntu-latest
