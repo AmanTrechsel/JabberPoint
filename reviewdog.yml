@@ -1,0 +1,3 @@
+runner:
+  checkstyle:
+    max_annotate: 10000
