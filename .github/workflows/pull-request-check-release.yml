@@ -86,8 +86,10 @@ jobs:
         
       - name: Log
         run: |
-          cd target
-          ls -al
+          ls -al ~/
+          ls -al ./
+          ls -al ./target
+          ls -al ./staging
 
       - name: Upload Release Asset
         id: upload-release-asset 
