@@ -44,21 +44,27 @@ public class KeyController extends KeyAdapter
 			case KeyEvent.VK_ENTER:
 			case '+':
 				// Ga naar de volgende slide (PageDown, Down, Enter, +)
-				PREVIOUS_SLIDE_COMMAND.execute();
+				this.executeCommand(PREVIOUS_SLIDE_COMMAND);
 				break;
 			case KeyEvent.VK_PAGE_UP:
 			case KeyEvent.VK_UP:
 			case '-':
 				// Ga naar de vorige slide (PageUp, Up, -)
-				NEXT_SLIDE_COMMAND.execute();
+				this.executeCommand(NEXT_SLIDE_COMMAND);
 				break;
 			case 'q':
 			case 'Q':
 				// Sluit de applicatie (Q)
-				EXIT_COMMAND.execute();
+				this.executeCommand(EXIT_COMMAND);
 				break;
 			default:
 				break;
 		}
+	}
+
+	// Voert een commando uit
+	public void executeCommand(Command command)
+	{
+		command.execute();
 	}
 }

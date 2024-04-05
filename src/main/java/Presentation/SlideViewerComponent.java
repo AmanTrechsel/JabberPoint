@@ -26,8 +26,8 @@ public class SlideViewerComponent extends JComponent implements PresentationList
 	
 	// Fields
 	private Slide slide;
-	private Font labelFont = null;
-	private JFrame frame = null;
+	private Font labelFont;
+	private JFrame frame;
 	
 	// Presentatie variabelen
 	private int slideNumber;

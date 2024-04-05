@@ -124,7 +124,7 @@ public class MenuController extends MenuBar
 				public void actionPerformed(ActionEvent actionEvent)
 				{
 					// Commando uitvoeren
-					command.execute();
+					executeCommand(command);
 				}
 			});
 		}
@@ -137,6 +137,12 @@ public class MenuController extends MenuBar
 	public Frame getFrame()
 	{
 		return this.parent;
+	}
+
+	// Voert een commando uit
+	public void executeCommand(Command command)
+	{
+		command.execute();
 	}
 
 	// Maakt een menu-item aan met de gegeven naam en sneltoets

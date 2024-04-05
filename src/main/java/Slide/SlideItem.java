@@ -9,7 +9,7 @@ import java.awt.image.ImageObserver;
 public abstract class SlideItem
 {
 	// Level van het item
-	private int level = 0;
+	private final int level;
 
 	// Constructor
 	public SlideItem(int level)

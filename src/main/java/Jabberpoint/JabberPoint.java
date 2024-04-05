@@ -1,6 +1,7 @@
 package main.java.Jabberpoint;
 
 import main.java.Accessor.*;
+import main.java.Control.Commands.MenuDemoBase;
 import main.java.Presentation.*;
 
 import javax.swing.JOptionPane;
@@ -24,7 +25,7 @@ public class JabberPoint {
 
 		// Probeer de presentatie te laden
 		if (argv.length == 0) {
-			Accessor.getDemoAccessor().loadFile(presentation, "");
+			new MenuDemoBase().execute();
 		} else {
 			new XMLAccessor().loadFile(presentation, argv[0]);
 		}
