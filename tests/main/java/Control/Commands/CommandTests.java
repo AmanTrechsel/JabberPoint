@@ -1,5 +1,8 @@
 package main.java.Control.Commands;
 
+import main.java.Accessor.DemoPresentation;
+import main.java.Accessor.ImageDemo;
+import main.java.Accessor.PlenairDemo;
 import main.java.Jabberpoint.JabberPoint;
 import main.java.Presentation.ControlPresentation;
 import main.java.Presentation.Presentation;
@@ -16,6 +19,9 @@ class CommandTests
 	private Presentation presentation;
 	private PageUp pageUp;
 	private PageDown pageDown;
+	private MenuDemoBase menuDemoBase;
+	private MenuDemoImage menuDemoImage;
+	private MenuDemoPlenair menuDemoPlenair;
 
 	@BeforeEach
 	public void setup() throws IOException
@@ -25,6 +31,9 @@ class CommandTests
 		this.presentation = this.controlPresentation.getPresentation();
 		this.pageUp = new PageUp();
 		this.pageDown = new PageDown();
+		this.menuDemoBase = new MenuDemoBase();
+		this.menuDemoImage = new MenuDemoImage();
+		this.menuDemoPlenair = new MenuDemoPlenair();
 	}
 
 	@Test
@@ -45,4 +54,27 @@ class CommandTests
 		assertEquals(0, this.presentation.getSlideNumber());
 	}
 
+	@Test
+	public void menuDemoBase_execute_expectToLoad() throws IOException
+	{
+		assertDoesNotThrow(() -> this.menuDemoBase.execute());
+		assertEquals("Demo Presentation", this.presentation.getTitle());
+		assertEquals(4, this.presentation.getSize());
+	}
+
+	@Test
+	public void menuDemoImage_execute_expectToLoad() throws IOException
+	{
+		assertDoesNotThrow(() -> this.menuDemoImage.execute());
+		assertEquals("Image Demo Presentation", this.presentation.getTitle());
+		assertEquals(4, this.presentation.getSize());
+	}
+
+	@Test
+	public void menuDemoPlenair_execute_expectToLoad() throws IOException
+	{
+		assertDoesNotThrow(() -> this.menuDemoPlenair.execute());
+		assertEquals("Plenary Meeting Demo", this.presentation.getTitle());
+		assertEquals(7, this.presentation.getSize());
+	}
 }

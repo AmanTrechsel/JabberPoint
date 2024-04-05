@@ -39,7 +39,7 @@ public class BitmapItem extends SlideItem
 		catch (IOException exception)
 		{
 			System.out.println(FILE + this.imageName + NOT_FOUND);
-			
+
 			// Probeer de not found image te laden
 			try
 			{

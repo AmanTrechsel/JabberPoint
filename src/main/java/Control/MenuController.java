@@ -78,7 +78,7 @@ public class MenuController extends MenuBar
 		viewCommands.add(new PageDown());
 		viewCommands.add(new PageUp());
 		viewCommands.add(new PageGoTo());
-		
+
 		// Alle "Demo" menu-items
 		ArrayList<Command> demoCommands = new ArrayList<Command>();
 		demoCommands.add(new MenuDemoBase());
