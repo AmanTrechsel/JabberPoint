@@ -84,12 +84,16 @@ jobs:
           prerelease: false
       
       - name: Set up JDK 21
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: actions/setup-java@v4
         with:
           java-version: 21
           distribution: 'oracle'
 
       - name: Cache Maven packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: actions/cache@v4
         with:
           path: ~/.m2
@@ -97,6 +101,8 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build Jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mvn package && cp target/*.jar ./JabberPoint-${{ secrets.VERSION }}.jar
 
       - name: Upload Release Asset
@@ -106,7 +112,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./*.jar
+          asset_path: ./JabberPoint-${{ secrets.VERSION }}.jar
           asset_name: JabberPoint-${{ secrets.VERSION }}.jar
           asset_content_type: application/java-archive
 
