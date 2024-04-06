@@ -31,14 +31,17 @@ jobs:
 
   check-style:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Run Checkstyle
         uses: nikitasavinov/checkstyle-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          filter_mode: nofilter
+          checkstyle_config: 'checkstyle.xml'
+          properties_file: 'reviewdog.yml'
 
       - name: Fail on lint errors (optional)
         run: exit 1
