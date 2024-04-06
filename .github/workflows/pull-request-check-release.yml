@@ -97,7 +97,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build Jar
-        run: mvn package | cp target/*.jar ./JabberPoint-${{ secrets.VERSION }}.jar
+        run: mvn package && cp target/*.jar ./JabberPoint-${{ secrets.VERSION }}.jar
 
       - name: Upload Release Asset
         id: upload-release-asset 
